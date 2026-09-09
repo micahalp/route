@@ -20,4 +20,4 @@ The original Git history scan reported 1,368 generic-pattern findings across 244
 
 ## Remaining handoff decisions
 
-The owner confirmed the private GitHub repository under micahalp. Agree the final auditor scope before review begins. CI is configured with pinned action revisions and a pinned Foundry release; consult [the Actions runs](https://github.com/micahalp/route-contract-audit/actions) for the exact reviewed commit. Optional historical fork tests and live third-party integrations were not rerun. Unit tests and preparation checks are not an independent security audit.
+The owner confirmed the private GitHub repository under micahalp. Agree the final auditor scope before review begins. CI is configured with pinned action revisions and a pinned Foundry release; consult [the Actions runs](https://github.com/micahalp/route/actions) for the exact reviewed commit. Optional historical fork tests and live third-party integrations were not rerun. Unit tests and preparation checks are not an independent security audit.
