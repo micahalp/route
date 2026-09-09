@@ -2,6 +2,8 @@
 
 Standalone, private-by-default audit handoff for Route on Robinhood Chain (chain ID 4663). **Unaudited. Scope is provisional until agreed with the owner and auditor.** This repository is an exact source snapshot, including local work, with new audit documentation and a minimal reproducible dependency lock.
 
+Repository: [micahalp/route-contract-audit](https://github.com/micahalp/route-contract-audit). Start with the [proposed auditor brief](audit/AUDITOR_BRIEF.md). The recommended initial review is live swap settlement and the flywheel; off-chain integrations and order systems are separately scoped. Check [GitHub Actions](https://github.com/micahalp/route-contract-audit/actions) for validation of the exact commit being reviewed.
+
 ## Start here
 
 1. Read [scope and status](audit/SCOPE.md), [architecture and trust boundaries](audit/ARCHITECTURE.md), and [known issues](audit/KNOWN_ISSUES.md).

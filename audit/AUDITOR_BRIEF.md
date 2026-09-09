@@ -24,4 +24,4 @@ An exact scope/commit, findings with severity and reproducible cases, remediatio
 
 The clean candidate installs one pinned OpenZeppelin dependency and passes 608 local Solidity tests. Source hashes are preserved. The four swap executors and flywheel match compiled deployed runtime with constructor-set regions excluded; immutable values and external dependencies need separate verification. This is audit preparation, not a completed independent audit. The broader application still has lint findings documented in VALIDATION.md.
 
-No original Git history, production credentials, wallet keys or deployment utilities are included. Repository destination and final scope are pending agreement.
+No original Git history, production credentials, wallet keys or deployment utilities are included. The private repository is micahalp/route-contract-audit. The final auditor scope remains to be agreed.
