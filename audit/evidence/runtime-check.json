@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-09-09T13:09:41.226Z",
+  "rpc": "https://rpc.mainnet.chain.robinhood.com",
+  "rows": [
+    {
+      "role": "direct",
+      "address": "0x22c1Bba36Ba220964D029Eb4B1eF7c6ed167E32E",
+      "contract": "RoutePoolExecutor",
+      "runtimeBytes": 11063,
+      "runtimeHash": "0xa27405693e11c80466653ab5c8f6fc4e6b991d745eba45ff7f01d3332da6eece",
+      "compiledBytes": 11063,
+      "immutableRegions": 33,
+      "maskedRuntimeMatches": true
+    },
+    {
+      "role": "kyber",
+      "address": "0xd8f7171886F8476ECE2E51CFFE8C4c637815a815",
+      "contract": "RouteMetaExecutor",
+      "runtimeBytes": 2300,
+      "runtimeHash": "0xc7828fa672baab64352a6630c17dacb8aa69779ddeadc36be87feb47b6aeb462",
+      "compiledBytes": 2300,
+      "immutableRegions": 5,
+      "maskedRuntimeMatches": true
+    },
+    {
+      "role": "kyberToken",
+      "address": "0x70656A2B4A401DeF17c55687c19C536C0FAD4DB1",
+      "contract": "RouteLeanMetaExecutor",
+      "runtimeBytes": 2064,
+      "runtimeHash": "0x776b37d31a42f463eb0f9edd42f535d5a869965a8990d5bafd372d63fe829b7e",
+      "compiledBytes": 2064,
+      "immutableRegions": 6,
+      "maskedRuntimeMatches": true
+    },
+    {
+      "role": "zerox",
+      "address": "0x201a935146E1283F35bB54b8Fe7a4C584265B7E8",
+      "contract": "RouteMetaExecutor",
+      "runtimeBytes": 2300,
+      "runtimeHash": "0x73aa7dd0e94e6cde0bcaede45bd62d238acac1669aaaf52fec1a1d63a437bb67",
+      "compiledBytes": 2300,
+      "immutableRegions": 5,
+      "maskedRuntimeMatches": true
+    },
+    {
+      "role": "flywheel",
+      "address": "0xAdA939f2f1482a13e3c0c612bCB14f2615221E9d",
+      "contract": "RouteFeeFlywheel72h",
+      "runtimeBytes": 5253,
+      "runtimeHash": "0xc6a59d95bda94e2f1e0826203e2ebd48175a56bf7e6687dce239aab995519fd5",
+      "compiledBytes": 5253,
+      "immutableRegions": 27,
+      "maskedRuntimeMatches": true
+    }
+  ],
+  "limitations": "Read-only runtime code comparison with compiled immutable regions masked. This is not verification of immutable values, constructor effects, storage, adapter code or external dependencies. Compiler metadata is included in the comparison.",
+  "chainId": 4663,
+  "blockNumber": "0x37dba13",
+  "blockHash": "0xad89c65a96061b9805b6ed0f27d1fc48c6b514ce225093dde1bbc314a7cabb78",
+  "pinnedBlockStable": true
+}

@@ -1,0 +1,29 @@
+{
+  "chainId": 4663,
+  "executor": "0x70656A2B4A401DeF17c55687c19C536C0FAD4DB1",
+  "contract": "RouteLeanMetaExecutor",
+  "constructorArgs": [
+    "0x6131B5fae19EA4f9D964eAc0408E4408b66337b5",
+    "0xe21fd0e9"
+  ],
+  "runtimeHash": "0x776b37d31a42f463eb0f9edd42f535d5a869965a8990d5bafd372d63fe829b7e",
+  "creationBytecodeHash": "0x95994daf234586db54697cd068d28c39670316b5f8880f7f26be0737073f6f5c",
+  "sourceSha256": "a43d5369c5d963dc328a72ca99e007f34bb9d6958e360b27dbcaa16889dbff38",
+  "protocolFeeBps": 0,
+  "status": "deployed-smoke-tested-unaudited",
+  "deployment": "0x9ab73daa8d7a2dcc5230b30858e7575f68a56d92a1929c4e46783f8bbc93c810",
+  "smoke": {
+    "hash": "0xc0aa29ca011c5bc466d762cf311c7b9a8cfefcda21dfa6c4704bb428213114bc",
+    "block": "56156931",
+    "amountIn": "100000000000000",
+    "tokenOut": "0x0E0d2C89a5a019FE1cF762e5e33187631DACC21B",
+    "minimum": "6079640552813998955",
+    "output": "6110122019017037964",
+    "gasUsed": "268316"
+  },
+  "evidence": {
+    "file": "outputs/lean-meta-fork-2026-09-06T17-18-30-641Z/raw.json",
+    "sha256": "c272d3b3b87d47ac4299e1f90a059066d9bca6873eebfa232d9eb65fd638b477"
+  },
+  "completedAt": "2026-09-06T17:30:26.093Z"
+}

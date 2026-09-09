@@ -1,0 +1,9 @@
+title = "Route contract audit secret scan"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Exactly 20-byte public EVM addresses, not 32-byte private keys or other credentials"
+regexTarget = "secret"
+regexes = ['''^0x[0-9a-fA-F]{40}$''']

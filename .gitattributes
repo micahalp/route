@@ -1,0 +1,5 @@
+* text=auto
+contracts/**/*.sol -text
+foundry.toml -text
+deployments/**/*.json -text
+lib/route/fee-free-deployment.json -text

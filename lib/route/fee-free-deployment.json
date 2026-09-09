@@ -1,0 +1,11 @@
+{
+  "chainId": 4663,
+  "mode": "fee-free",
+  "protocolFeeBps": 0,
+  "route": "0x22c1Bba36Ba220964D029Eb4B1eF7c6ed167E32E",
+  "directContract": "RoutePoolExecutor",
+  "kyber": "0xd8f7171886F8476ECE2E51CFFE8C4c637815a815",
+  "kyberToken": "0x70656A2B4A401DeF17c55687c19C536C0FAD4DB1",
+  "zerox": "0x201a935146E1283F35bB54b8Fe7a4C584265B7E8",
+  "status": "fork-tested-mainnet-deployed-unaudited"
+}

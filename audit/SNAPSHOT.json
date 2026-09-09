@@ -1,0 +1,340 @@
+{
+  "createdAt": "2026-09-09T13:08:38.302Z",
+  "sourceRepository": "routerh/route",
+  "sourceCommit": "e68052f73a38882f4b03c2e99c444d63c4c33dc0",
+  "sourceBranch": "codex/order-foundations-preview",
+  "includesWorkingTree": true,
+  "scopeStatus": "candidate-awaiting-owner-and-auditor-confirmation",
+  "files": [
+    {
+      "path": "contracts/adapters/BaseAdapter.sol",
+      "sha256": "763926b100410487f5b62ad93a71c4b94a228b735e2a182f09f1d52bca562ab1",
+      "bytes": 2243
+    },
+    {
+      "path": "contracts/adapters/CLAdapter.sol",
+      "sha256": "744601a120b6a27c5a598b0e404359b81b0275afa5881b7e150089339f1f5d8b",
+      "bytes": 1402
+    },
+    {
+      "path": "contracts/adapters/V2Adapter.sol",
+      "sha256": "ea23daf0229e9c6d7c18d8679c4fe5614c7dd7e29a78c02b07fe31d806dbfead",
+      "bytes": 1538
+    },
+    {
+      "path": "contracts/adapters/V3Adapter.sol",
+      "sha256": "f5ceef6f145d04521da25fb714d6b75c21e7eee62e996a64a6d5b81f7b07bf78",
+      "bytes": 2434
+    },
+    {
+      "path": "contracts/adapters/V4Adapter.sol",
+      "sha256": "69b29d25bfe3465d49adae7ca3db4c3bd87b1e16f1fba7cf38969c5e57736225",
+      "bytes": 5395
+    },
+    {
+      "path": "contracts/experimental/DirectV3Adapter.sol",
+      "sha256": "813bdf7a1419e7443b7713918929e494ce151abaaf1ac270e8f739a0c3c1854d",
+      "bytes": 6784
+    },
+    {
+      "path": "contracts/experimental/OrvexVaultLeg.sol",
+      "sha256": "252fdb894a14cf668e7a11b84b60ac110ad758ac9f6831de9e0ef683c2580c88",
+      "bytes": 3471
+    },
+    {
+      "path": "contracts/experimental/RouteFeeFlywheel.sol",
+      "sha256": "27c823a7a32ffe4a72f5023dfcc217e830b12b9a9098372876ffe2f7dcbdce12",
+      "bytes": 7177
+    },
+    {
+      "path": "contracts/experimental/RouteFeeFlywheel72h.sol",
+      "sha256": "9e77ca644b38e4fa6499d05604bb5bdade69a403c6fbf993fd71bb896549f084",
+      "bytes": 7182
+    },
+    {
+      "path": "contracts/experimental/RouteMetricExecutor.sol",
+      "sha256": "34c6ea234795cae8b96bfa362b07a2c59cd3d113c9a3094bec88ff47a41e5c98",
+      "bytes": 7953
+    },
+    {
+      "path": "contracts/experimental/RouteOrderPriceFeed.sol",
+      "sha256": "162287905cb1efbc33624eb21462c170280ded4c4517946473a2a929b028422e",
+      "bytes": 2830
+    },
+    {
+      "path": "contracts/experimental/RouteOrderVault.sol",
+      "sha256": "6e7511da20c703217627b89c22dfb59e66ecd96e7c4b8816cbf6da7bddf2071d",
+      "bytes": 8181
+    },
+    {
+      "path": "contracts/experimental/RouteOrvexExecutor.sol",
+      "sha256": "e6050a130e1237dfac28a3522ebf3d5d306ee136278ad4ed02bc3b1d50cf0ead",
+      "bytes": 18201
+    },
+    {
+      "path": "contracts/experimental/RouteOrvexProbe.sol",
+      "sha256": "044469478546f516f203c413cba9fcfa217b1b5fad2e375559e89c5201a451ad",
+      "bytes": 6361
+    },
+    {
+      "path": "contracts/experimental/RouteRateOrderVault.sol",
+      "sha256": "e18ed82da1f7be1ed5919ef9184a6143ac3104cc1a0e913b1afb6528e9a1ed8c",
+      "bytes": 6813
+    },
+    {
+      "path": "contracts/experimental/RouteUsdOrderVault.sol",
+      "sha256": "42b8e9409dd2d3cc3f9ae5d6b8ae49a7d6e2641a8689fa0dfa4aa59d155c069b",
+      "bytes": 9257
+    },
+    {
+      "path": "contracts/experimental/RouteUsdStreamsFeed.sol",
+      "sha256": "a89f31d3a17a32d5360c0d97e7136e5530509703ee87b1b5e5171f0201314279",
+      "bytes": 3218
+    },
+    {
+      "path": "contracts/experimental/RouteV3CallbackProbe.sol",
+      "sha256": "48c45b571db5b0ce113b56368167816cd30659b85068ac4c85995f1531bdfc12",
+      "bytes": 5472
+    },
+    {
+      "path": "contracts/experimental/RouteV4SellProbe.sol",
+      "sha256": "34e748c2ac59a16114fc3bbaf2ab8efd509e632153bca720b1d5bf9576b1bab3",
+      "bytes": 4694
+    },
+    {
+      "path": "contracts/interfaces/IRamsesRouter.sol",
+      "sha256": "0511d2a1f2a4565a606f78669be562be7ed4464479381ed2b27be1b5168b3fd3",
+      "bytes": 725
+    },
+    {
+      "path": "contracts/interfaces/IRouteAdapter.sol",
+      "sha256": "44fb8bda19c96d711b93422e864d0ddd26966d61c2b04e7d6d0ecfdfc622ec5b",
+      "bytes": 506
+    },
+    {
+      "path": "contracts/Route.sol",
+      "sha256": "8dd4b96cacf9815726e7bdef7842a5bcd0356b65f4e14a2cc95747a02f2ebc01",
+      "bytes": 7974
+    },
+    {
+      "path": "contracts/RouteExecutionHub.sol",
+      "sha256": "4e3a3d9b9b8f79bd23a6c059c71979671d9bad8ba1dff9847048b2aa69a6ea1b",
+      "bytes": 11195
+    },
+    {
+      "path": "contracts/RouteExecutor.sol",
+      "sha256": "74867a7be3e7a54f0c859afd28d7e4ecb695cd935686b19483281b6ccfbf6c38",
+      "bytes": 6305
+    },
+    {
+      "path": "contracts/RouteFastExecutor.sol",
+      "sha256": "cee3593341ec375e3fbaa9ecc224bbe9cc7957b2697ecf4ce1eff42a8f48d0bd",
+      "bytes": 9197
+    },
+    {
+      "path": "contracts/RouteFeeExecutor.sol",
+      "sha256": "a83a23773d3de2dae01a3e5932dde02f3343cc5cb175859b0bf65e10bd5955de",
+      "bytes": 7755
+    },
+    {
+      "path": "contracts/RouteJitV2Executor.sol",
+      "sha256": "fdb8132301ef1ccbaf38907b870ba66de1a86de9257cddfac5e128ffccf42355",
+      "bytes": 8990
+    },
+    {
+      "path": "contracts/RouteLeanMetaExecutor.sol",
+      "sha256": "a43d5369c5d963dc328a72ca99e007f34bb9d6958e360b27dbcaa16889dbff38",
+      "bytes": 3576
+    },
+    {
+      "path": "contracts/RouteMetaExecutor.sol",
+      "sha256": "6eb7fad7a2f95ddf2939a7f528ca39c66c05bc4a013d618f6e057e91fa3b56d9",
+      "bytes": 3456
+    },
+    {
+      "path": "contracts/RoutePoolExecutor.sol",
+      "sha256": "522a8b6e5665567c1f10aef3f95f98225bfd610d7cdd881581b15109d2b9d987",
+      "bytes": 17400
+    },
+    {
+      "path": "contracts/RouteRamsesExecutor.sol",
+      "sha256": "4f0189890e2508918488d6de3789b4d35d535da87efa6a754f13198e2c817917",
+      "bytes": 13660
+    },
+    {
+      "path": "contracts/test/DirectV3Adapter.t.sol",
+      "sha256": "1440f05c3098ace3b0b0bc9df4e1b1c431d62c4863a91cdbfbb2e84a382c4c5e",
+      "bytes": 7746
+    },
+    {
+      "path": "contracts/test/LeanMetaCompatibility.t.sol",
+      "sha256": "72c13ce3786bf1bf1417d222efd33736c87ecbf0bdcffe0ad51b10c6a32d3a87",
+      "bytes": 3598
+    },
+    {
+      "path": "contracts/test/Route.t.sol",
+      "sha256": "5e6363a9c6909baaca784a856c5e5b10cff8e4e60966b33ad04efa8874e66f12",
+      "bytes": 11640
+    },
+    {
+      "path": "contracts/test/RouteExecutionHub.t.sol",
+      "sha256": "c600c86b1c84acb119d3a6853fa40789a899908323867b31312702799143b506",
+      "bytes": 14759
+    },
+    {
+      "path": "contracts/test/RouteExecutor.t.sol",
+      "sha256": "1470b5d70887b6bc96cdb87b02a56cfb83608f5205e07fa6da75a8571a8fc543",
+      "bytes": 7276
+    },
+    {
+      "path": "contracts/test/RouteFastExecutor.t.sol",
+      "sha256": "e0bd0b06d098bf0c79efae5b678c17b4142f2b5fc448b27987316abe86d56fe8",
+      "bytes": 20785
+    },
+    {
+      "path": "contracts/test/RouteFeeExecutor.t.sol",
+      "sha256": "a3d9dd35e6b6795b676b17c30e22628418739658b7a0d58c52e15465d10a9f01",
+      "bytes": 11139
+    },
+    {
+      "path": "contracts/test/RouteFeeFlywheel.t.sol",
+      "sha256": "39928a9abfb07a5c3a14d88bf4947b4bde967f8b447dec7dfe501487e82a67c7",
+      "bytes": 7748
+    },
+    {
+      "path": "contracts/test/RouteFeeFlywheel72h.t.sol",
+      "sha256": "a1c7ffad4fe4aee52c1d67204fedf5e2de83756d22fc081998e96dd62d87fb9f",
+      "bytes": 8622
+    },
+    {
+      "path": "contracts/test/RouteFeeFlywheel72hFork.t.sol",
+      "sha256": "7f96ced2df4eb01d86d486d517687742ac1b87532de775025105aec60f7cd017",
+      "bytes": 4711
+    },
+    {
+      "path": "contracts/test/RouteFeeFlywheelFork.t.sol",
+      "sha256": "afb2ade856e567cc161eee5c56a564013b74f6e42c19605db69bff3515658687",
+      "bytes": 4489
+    },
+    {
+      "path": "contracts/test/RouteJitV2Executor.t.sol",
+      "sha256": "d3de46397cf7a782ecbda696da784179f5a71504744ebf12170e7513916f4d06",
+      "bytes": 16474
+    },
+    {
+      "path": "contracts/test/RouteLeanMetaExecutor.t.sol",
+      "sha256": "7d1c01ea60e0656e62893db19d00128e9c6e76adfdb8b43d4d8b60684ea9a830",
+      "bytes": 9898
+    },
+    {
+      "path": "contracts/test/RouteMetaExecutor.t.sol",
+      "sha256": "44b9406bf3709c9cc468678a58ee9d2a841a8bc26c66d7f285fad97ab4b9cbfc",
+      "bytes": 4292
+    },
+    {
+      "path": "contracts/test/RouteMetricExecutor.t.sol",
+      "sha256": "2c580eeb6c5a03c6f9395128a9842e0181c6a9935346d84dd5ebcaaf0428aa7f",
+      "bytes": 11980
+    },
+    {
+      "path": "contracts/test/RouteOrderPriceFeed.t.sol",
+      "sha256": "53e39eaa3627d2e5c68e47521669ab2a5621a19ec778dfa5d05d11387b47ac1a",
+      "bytes": 4310
+    },
+    {
+      "path": "contracts/test/RouteOrderSettlement.t.sol",
+      "sha256": "cad53ccc159f2b4417de491944f7a8c202b5773b90c8d96ef09ba60066ed74ac",
+      "bytes": 5187
+    },
+    {
+      "path": "contracts/test/RouteOrderVault.t.sol",
+      "sha256": "2018d8b58539e8dd549ef733dd78a5866d87bf5361e861e744d701de71ef35ee",
+      "bytes": 9948
+    },
+    {
+      "path": "contracts/test/RouteOrvexProbeFork.t.sol",
+      "sha256": "85407b36b18b8a90fdb6765fcfd052cb8270e08323bbe9345e0dc70f15a0d271",
+      "bytes": 7249
+    },
+    {
+      "path": "contracts/test/RoutePoolExecutor.t.sol",
+      "sha256": "9f586a05574db422655fff98a1dcda4b6791631d0917592b6dd3e493a0bcc3c4",
+      "bytes": 11175
+    },
+    {
+      "path": "contracts/test/RouteRamsesExecutor.t.sol",
+      "sha256": "efd040ea35f407fd75cfee684474c705374025bd22871445443ad5b95eb9aabe",
+      "bytes": 12542
+    },
+    {
+      "path": "contracts/test/RouteRamsesPair.t.sol",
+      "sha256": "b049beae8b3aaaa3c31a3ea3ba90b72ad9943a7f7402f38548a29b685e2bfa03",
+      "bytes": 13751
+    },
+    {
+      "path": "contracts/test/RouteRateOrderVault.t.sol",
+      "sha256": "0fb46679f16cd24545b3eb02b9f17798d1a2122a5ef006023d8a1b3c07292037",
+      "bytes": 7216
+    },
+    {
+      "path": "contracts/test/RouteUsdOrderVault.t.sol",
+      "sha256": "b58dcbe2a3250099c9928f7204d403ec9759fa2584bf290dd5ff24388f35a701",
+      "bytes": 6426
+    },
+    {
+      "path": "contracts/test/RouteUsdStreamsFeed.t.sol",
+      "sha256": "38780ae1e4dfda3d3b8537b96e08b2daa22612bfa2fd0081a9d9b826c6b9ac3e",
+      "bytes": 3311
+    },
+    {
+      "path": "contracts/test/RouteV3CallbackProbe.t.sol",
+      "sha256": "670ab1e5dffa7e6f636e30b79aaeb4e2ce27bbedc0c6372794d78a1492bd9db0",
+      "bytes": 10025
+    },
+    {
+      "path": "contracts/test/RouteV4SellProbe.t.sol",
+      "sha256": "a6eb46184e6c674658e268b2ee369071d866a6a6a10e4e1155a87b7813ec5382",
+      "bytes": 6323
+    },
+    {
+      "path": "contracts/test/TestnetFixture.sol",
+      "sha256": "3c5798c767eeeed5eb21e64b6147736332cedbe4a68c6fec54e1ef1357e29792",
+      "bytes": 1474
+    },
+    {
+      "path": "contracts/test/V3Adapter.t.sol",
+      "sha256": "41cfcea76b340d7e3fc2a89bf1f08acb2631995e58b484ba4e84e214e569fb1f",
+      "bytes": 2624
+    },
+    {
+      "path": "contracts/test/V4Execution.t.sol",
+      "sha256": "31a5eaa22357d03dca82aabe2618e482867a2b5963b13d85657abe6f1bcc2590",
+      "bytes": 5340
+    },
+    {
+      "path": "foundry.toml",
+      "sha256": "abf04f5ea4d4870f5ab5b3d2d516351b71f623e16122a16dbb57635dc9baf8da",
+      "bytes": 327
+    },
+    {
+      "path": "lib/route/fee-free-deployment.json",
+      "sha256": "eff283570261946f0d3c8231c20c2427cc7cf741ad3b71a58cb08fe70ef0c4eb",
+      "bytes": 395
+    },
+    {
+      "path": "deployments/pool-executor-mainnet.json",
+      "sha256": "1fa112909c51b2d2e5b8532977a0b4a926e070c4c6b1964f08b2eb0f4bbde038",
+      "bytes": 1583
+    },
+    {
+      "path": "deployments/lean-meta-mainnet.json",
+      "sha256": "3e186f99b519a7363a83f062b5a7fea8f7430ef2dc3a9247687b9806d387ef5a",
+      "bytes": 1181
+    },
+    {
+      "path": "deployments/fee-free-zerox-mainnet.json",
+      "sha256": "228aac7bfe91dd3d4360c9e55f6d6cc4a910666acf16abc554392d78f759a2ed",
+      "bytes": 572
+    }
+  ]
+}

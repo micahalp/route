@@ -1,0 +1,14 @@
+{
+  "executor": "0x201a935146E1283F35bB54b8Fe7a4C584265B7E8",
+  "protocolFeeBps": 0,
+  "chainId": 4663,
+  "constructorArgs": [
+    "0x0000000000001fF3684f28c67538d4D072C22734",
+    "0x2213bc0b"
+  ],
+  "creationBytecodeHash": "0x385d79b9ab92cbea4d24082b5faa6f0cd829818c2dec4a2f0e475aaaf5c9f6e8",
+  "runtimeCodeHash": "0x73aa7dd0e94e6cde0bcaede45bd62d238acac1669aaaf52fec1a1d63a437bb67",
+  "transaction": "0xb43d0adc7ab8a759d3ce58fb66a6aaf105b3d856a4ae651a359715ec9f05303a",
+  "status": "fork-tested-mainnet-deployed-unaudited",
+  "deployedAt": "2026-09-05T21:06:42.965Z"
+}
