@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '26'
@@ -16,4 +18,5 @@ jobs:
           version: v1.5.1
       - run: npm ci --ignore-scripts
       - run: npm run verify:snapshot
+      - run: npm run format:check
       - run: npm test

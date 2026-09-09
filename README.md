@@ -1,6 +1,6 @@
 # Route contract audit candidate
 
-Standalone, private-by-default audit handoff for Route on Robinhood Chain (chain ID 4663). **Unaudited. Scope is provisional until agreed with the owner and auditor.** This repository is an exact source snapshot, including local work, with new audit documentation and a minimal reproducible dependency lock.
+Standalone, private-by-default audit handoff for Route on Robinhood Chain (chain ID 4663). **Unaudited. Scope is provisional until agreed with the owner and auditor.** This repository contains formatted contract source, audit documentation and a minimal reproducible dependency lock.
 
 Repository: [micahalp/route-contract-audit](https://github.com/micahalp/route-contract-audit). Start with the [proposed auditor brief](audit/AUDITOR_BRIEF.md). The recommended initial review is live swap settlement and the flywheel; off-chain integrations and order systems are separately scoped. Check [GitHub Actions](https://github.com/micahalp/route-contract-audit/actions) for validation of the exact commit being reviewed.
 
@@ -13,7 +13,9 @@ Repository: [micahalp/route-contract-audit](https://github.com/micahalp/route-co
 
 The default tests run locally without a wallet, signing key, funded account or RPC. Files named `*Fork*` are excluded because they require historical RPC state or explicit environment values. They remain available for optional integration work.
 
-Original source paths and bytes are preserved, including historical comments. Reformatting a verified Solidity file can change its metadata and verification output. Current scope/deployment interpretation lives in the audit documentation, rather than silently rewriting historical source.
+The exact source used for the original runtime comparison remains at commit [`1bc96e1`](https://github.com/micahalp/route-contract-audit/tree/1bc96e1a1e1737195a84747cca262785b7757b73). Current source has expanded formatting and shorter comments. Solidity metadata changes with source bytes: use that original commit for exact deployed-source reproduction. `audit/ORIGINAL_SNAPSHOT.json` preserves its hashes, while `audit/SNAPSHOT.json` records the formatted files. `npm run verify:snapshot` verifies both versions; use a full Git clone. See [formatting validation](audit/FORMATTING.md) for the executable-bytecode comparison.
+
+Run `npm run format` before committing, or `npm run format:check` to check without writing. CI enforces the shared Foundry formatting rules.
 
 ## Layout
 

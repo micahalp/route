@@ -28,8 +28,12 @@ contract JitPairFixture {
 
     function swap(uint256 out0, uint256 out1, address to, bytes calldata data) external {
         require(data.length == 0 && (out0 > 0 || out1 > 0) && out0 < r0 && out1 < r1);
-        if (out0 > 0) IERC20(token0).transfer(to, out0);
-        if (out1 > 0) IERC20(token1).transfer(to, out1);
+        if (out0 > 0) {
+            IERC20(token0).transfer(to, out0);
+        }
+        if (out1 > 0) {
+            IERC20(token1).transfer(to, out1);
+        }
         uint256 b0 = IERC20(token0).balanceOf(address(this));
         uint256 b1 = IERC20(token1).balanceOf(address(this));
         uint256 in0 = b0 > r0 - out0 ? b0 - (r0 - out0) : 0;
@@ -43,7 +47,10 @@ contract JitPairFixture {
 contract JitFactoryFixture {
     mapping(address => mapping(address => address)) public getPair;
 
-    function add(Token a, Token b, uint256 reserveA, uint256 reserveB) external returns (JitPairFixture pair) {
+    function add(Token a, Token b, uint256 reserveA, uint256 reserveB)
+        external
+        returns (JitPairFixture pair)
+    {
         pair = new JitPairFixture(address(a), address(b));
         getPair[address(a)][address(b)] = address(pair);
         getPair[address(b)][address(a)] = address(pair);
@@ -113,23 +120,35 @@ contract RouteJitV2ExecutorTest {
 
     function paths(bool adaptive) private view returns (address[] memory result) {
         result = new address[](adaptive ? 2 : 1);
-        if (adaptive) result[1] = address(c);
+        if (adaptive) {
+            result[1] = address(c);
+        }
     }
 
-    function swap(address[] memory p, uint256 minimum, uint256 threshold) private returns (uint256) {
+    function swap(address[] memory p, uint256 minimum, uint256 threshold)
+        private
+        returns (uint256)
+    {
         vm.prank(user);
-        return guard.swap(address(a), address(b), 10 ether, minimum, recipient, block.timestamp, p, threshold);
+        return guard.swap(
+            address(a), address(b), 10 ether, minimum, recipient, block.timestamp, p, threshold
+        );
     }
 
     function assertClean() private view {
         require(
-            a.balanceOf(address(guard)) == 0 && b.balanceOf(address(guard)) == 0 && c.balanceOf(address(guard)) == 0
+            a.balanceOf(address(guard)) == 0 && b.balanceOf(address(guard)) == 0
+                && c.balanceOf(address(guard)) == 0
         );
-        require(a.allowance(address(guard), address(direct)) == 0 && a.allowance(user, address(guard)) == 0);
+        require(
+            a.allowance(address(guard), address(direct)) == 0
+                && a.allowance(user, address(guard)) == 0
+        );
     }
 
     function testStaticDirectExactOutput() public {
-        (uint256 quoted, uint256 index) = guard.quote(address(a), address(b), 10 ether, paths(false), 0);
+        (uint256 quoted, uint256 index) =
+            guard.quote(address(a), address(b), 10 ether, paths(false), 0);
         require(index == 0 && swap(paths(false), quoted, 0) == quoted);
         require(a.balanceOf(user) == 90 ether && b.balanceOf(recipient) == quoted);
         assertClean();
@@ -146,7 +165,10 @@ contract RouteJitV2ExecutorTest {
         require(newIndex == 1 && newQuote >= oldQuote * 98 / 100);
         uint256 untouchedDirect = a.balanceOf(address(direct));
         require(swap(p, oldQuote * 98 / 100, 0) == newQuote);
-        require(a.balanceOf(address(direct)) == untouchedDirect && a.balanceOf(address(first)) == 1010 ether);
+        require(
+            a.balanceOf(address(direct)) == untouchedDirect
+                && a.balanceOf(address(first)) == 1010 ether
+        );
         require(b.balanceOf(recipient) == newQuote);
         assertClean();
     }
@@ -196,7 +218,8 @@ contract RouteJitV2ExecutorTest {
         Token absent = new Token("MISSING");
         address[] memory p = new address[](2);
         p[0] = address(absent);
-        (uint256 out, uint256 index) = guard.quote(address(a), address(b), 10 ether, p, type(uint256).max);
+        (uint256 out, uint256 index) =
+            guard.quote(address(a), address(b), 10 ether, p, type(uint256).max);
         require(index == 1 && swap(p, out, type(uint256).max) == out);
     }
 
@@ -244,11 +267,16 @@ contract RouteJitV2ExecutorTest {
         (uint256 out,) = guard.quote(address(0), address(b), 1 ether, p, 0);
         vm.prank(user);
         require(
-            guard.swap{value: 1 ether}(address(0), address(b), 1 ether, out, recipient, block.timestamp, p, 0) == out
+            guard.swap{value: 1 ether}(
+                address(0), address(b), 1 ether, out, recipient, block.timestamp, p, 0
+            ) == out
         );
         (out,) = guard.quote(address(a), address(0), 10 ether, p, 0);
         vm.prank(user);
-        require(guard.swap(address(a), address(0), 10 ether, out, recipient, block.timestamp, p, 0) == out);
+        require(
+            guard.swap(address(a), address(0), 10 ether, out, recipient, block.timestamp, p, 0)
+                == out
+        );
         require(recipient.balance == out && user.balance == 99 ether);
         assertClean();
     }
@@ -261,8 +289,8 @@ contract RouteJitV2ExecutorTest {
         b.mint(recipient, 11);
         uint256 out = swap(paths(true), 1, 0);
         require(
-            a.balanceOf(address(guard)) == 7 && b.balanceOf(address(guard)) == 8 && c.balanceOf(address(guard)) == 9
-                && address(guard).balance == 10
+            a.balanceOf(address(guard)) == 7 && b.balanceOf(address(guard)) == 8
+                && c.balanceOf(address(guard)) == 9 && address(guard).balance == 10
         );
         require(b.balanceOf(recipient) == out + 11);
     }
@@ -320,7 +348,10 @@ contract RouteJitV2ExecutorTest {
         (uint256 quote,) = guard.quote(address(a), address(b), amount, p, 0);
         require(quote > 0);
         vm.prank(user);
-        require(guard.swap(address(a), address(b), amount, quote, recipient, block.timestamp, p, 0) == quote);
+        require(
+            guard.swap(address(a), address(b), amount, quote, recipient, block.timestamp, p, 0)
+                == quote
+        );
         require(a.balanceOf(user) == 100 ether - amount && b.balanceOf(recipient) == quote);
     }
 

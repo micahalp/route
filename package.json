@@ -9,6 +9,8 @@
   "scripts": {
     "test": "forge test --no-match-path \"*Fork*\" --summary",
     "build": "forge build",
+    "format": "forge fmt",
+    "format:check": "forge fmt --check",
     "verify:snapshot": "node scripts/verify-snapshot.mjs"
   },
   "dependencies": {

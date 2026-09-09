@@ -19,37 +19,76 @@ abstract contract OrvexVaultLeg {
     error OrvexSettlementMismatch();
 
     function _assertOrvexRuntime() internal view {
-        if (block.chainid != 4663 ||
-            orvexManager.codehash != 0xabcccba7b2c0339035fab45b93950740b990e1ff74a4c5d576fb82c65a93a29f ||
-            orvexVault.codehash != 0x678bab6ace02b3fc508054b194f3f70190a0621f51bcae69be33cc5416031908 ||
-            orvexHook.codehash != 0x6e7e39c29fb7e77b2d3549654b8f35c01b47b2fe266ae7f7b658891696cb9c5b) revert OrvexInvalidLeg();
+        if (
+            block.chainid != 4663
+                || orvexManager.codehash
+                    != 0xabcccba7b2c0339035fab45b93950740b990e1ff74a4c5d576fb82c65a93a29f
+                || orvexVault.codehash
+                    != 0x678bab6ace02b3fc508054b194f3f70190a0621f51bcae69be33cc5416031908
+                || orvexHook.codehash
+                    != 0x6e7e39c29fb7e77b2d3549654b8f35c01b47b2fe266ae7f7b658891696cb9c5b
+        ) {
+            revert OrvexInvalidLeg();
+        }
     }
 
-    function _orvexSwap(address input, address output, uint256 amount) internal returns (uint256 out) {
+    function _orvexSwap(address input, address output, uint256 amount)
+        internal
+        returns (uint256 out)
+    {
         _assertOrvexRuntime();
-        if (amount == 0 || amount > uint256(uint128(type(int128).max)) ||
-            !((input == orvexWeth && output == orvexUsdg) || (input == orvexUsdg && output == orvexWeth))) revert OrvexInvalidLeg();
+        if (
+            amount == 0 || amount > uint256(uint128(type(int128).max))
+                || !((input == orvexWeth && output == orvexUsdg)
+                    || (input == orvexUsdg && output == orvexWeth))
+        ) {
+            revert OrvexInvalidLeg();
+        }
         bytes memory data = abi.encode(input, output, amount);
         orvexPending = keccak256(data);
         out = abi.decode(IOrvexVault(orvexVault).lock(data), (uint256));
-        if (orvexPending != bytes32(0)) revert OrvexCallbackRejected();
+        if (orvexPending != bytes32(0)) {
+            revert OrvexCallbackRejected();
+        }
     }
 
     function lockAcquired(bytes calldata data) external returns (bytes memory) {
-        if (msg.sender != orvexVault || orvexPending == bytes32(0) || keccak256(data) != orvexPending) revert OrvexCallbackRejected();
+        if (
+            msg.sender != orvexVault || orvexPending == bytes32(0)
+                || keccak256(data) != orvexPending
+        ) {
+            revert OrvexCallbackRejected();
+        }
         orvexPending = bytes32(0);
-        (address input, address output, uint256 amount) = abi.decode(data, (address, address, uint256));
+        (address input, address output, uint256 amount) =
+            abi.decode(data, (address, address, uint256));
         bool zeroForOne = input == orvexWeth;
-        IOrvexManager.Key memory key = IOrvexManager.Key(orvexWeth, orvexUsdg, orvexHook, orvexManager, 8388608, bytes32(uint256(0x3c0042)));
-        int256 delta = IOrvexManager(orvexManager).swap(key, IOrvexManager.Params(zeroForOne, -int256(amount),
-            zeroForOne ? 4295128740 : 1461446703485210103287273052203988822378723970341), "");
-        int128 d0 = int128(delta >> 128); int128 d1 = int128(delta);
-        int128 paid = zeroForOne ? d0 : d1; int128 received = zeroForOne ? d1 : d0;
-        if (paid >= 0 || received <= 0 || uint256(-int256(paid)) != amount) revert OrvexSettlementMismatch();
+        IOrvexManager.Key memory key = IOrvexManager.Key(
+            orvexWeth, orvexUsdg, orvexHook, orvexManager, 8388608, bytes32(uint256(0x3c0042))
+        );
+        int256 delta = IOrvexManager(orvexManager)
+            .swap(
+                key,
+                IOrvexManager.Params(
+                    zeroForOne,
+                    -int256(amount),
+                    zeroForOne ? 4295128740 : 1461446703485210103287273052203988822378723970341
+                ),
+                ""
+            );
+        int128 d0 = int128(delta >> 128);
+        int128 d1 = int128(delta);
+        int128 paid = zeroForOne ? d0 : d1;
+        int128 received = zeroForOne ? d1 : d0;
+        if (paid >= 0 || received <= 0 || uint256(-int256(paid)) != amount) {
+            revert OrvexSettlementMismatch();
+        }
         uint256 out = uint256(uint128(received));
         IOrvexVault(orvexVault).sync(input);
         IERC20(input).safeTransfer(orvexVault, amount);
-        if (IOrvexVault(orvexVault).settle() != amount) revert OrvexSettlementMismatch();
+        if (IOrvexVault(orvexVault).settle() != amount) {
+            revert OrvexSettlementMismatch();
+        }
         IOrvexVault(orvexVault).take(output, address(this), out);
         return abi.encode(out);
     }

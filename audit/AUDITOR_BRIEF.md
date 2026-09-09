@@ -8,7 +8,7 @@ We would like an audit proposal for Route on Robinhood Chain (4663). The immedia
 - RouteMetaExecutor and RouteLeanMetaExecutor: constrained Kyber/0x execution, opaque calldata boundaries, fixed targets/selectors and balance/allowance guarantees.
 - RouteFeeFlywheel72h: treasury/operator permissions, 65/35 allocation, expiring policy, floor and budget enforcement, pause/recovery and external fee-recipient handover.
 
-The candidate initial scope contains 11 Route source files and 787 physical lines including comments and blank lines, excluding OpenZeppelin. The final scope and price should be agreed on exact files and commit. Supporting historical source and all tests are retained for reproducibility and are not automatically part of the paid scope.
+The candidate initial scope contains 11 Route source files, excluding OpenZeppelin. Formatting expanded previously compressed statements; physical line counts should be measured on the agreed review commit. The final scope and price should be agreed on exact files and commit. Supporting historical source and all tests are retained for reproducibility and are not automatically part of the paid scope.
 
 ## Please quote separately
 

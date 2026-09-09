@@ -13,3 +13,9 @@ via_ir = true
 
 [fuzz]
 runs = 256
+
+[fmt]
+line_length = 100
+single_line_statement_blocks = "multi"
+contract_new_lines = false
+prefer_compact = "none"

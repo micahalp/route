@@ -1,0 +1,943 @@
+{
+  "checkedAt": "2026-09-09T13:29:28.034Z",
+  "baselineCommit": "1bc96e1a1e1737195a84747cca262785b7757b73",
+  "comparison": "Compiled runtime excludes trailing Solidity CBOR metadata; ABIs compared separately. No on-chain change.",
+  "rows": [
+    {
+      "artifact": "BaseAdapter.sol/BaseAdapter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "CLAdapter.sol/CLAdapter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "1e6a787c1e92ba38625a8706e9e549e8428c9bc77bf356f9dadf478e0072bc4a",
+      "afterExecutableSha256": "1e6a787c1e92ba38625a8706e9e549e8428c9bc77bf356f9dadf478e0072bc4a",
+      "executableBytes": 2762
+    },
+    {
+      "artifact": "CLAdapter.sol/ICLFactory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "CLAdapter.sol/ICLRouter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "Context.sol/Context.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "DirectV3Adapter.sol/DirectV3Adapter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "191e304ee8c2bcaa11e27cf8919cb3c230dd8f2a55a31ebd4d55df9e9e3cfab4",
+      "afterExecutableSha256": "191e304ee8c2bcaa11e27cf8919cb3c230dd8f2a55a31ebd4d55df9e9e3cfab4",
+      "executableBytes": 4460
+    },
+    {
+      "artifact": "DirectV3Adapter.sol/IDirectV3Factory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "DirectV3Adapter.sol/IDirectV3Pool.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "DirectV3Adapter.sol/IDirectV3Quoter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "draft-IERC6093.sol/IERC1155Errors.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "draft-IERC6093.sol/IERC20Errors.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "draft-IERC6093.sol/IERC721Errors.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "ERC20.sol/ERC20.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "IERC1363.sol/IERC1363.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "IERC165.sol/IERC165.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "IERC20.sol/IERC20.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "IERC20Metadata.sol/IERC20Metadata.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "IRamsesRouter.sol/IRamsesFactory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "IRamsesRouter.sol/IRamsesRouter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "IRouteAdapter.sol/IRouteAdapter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "Math.sol/Math.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "afterExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "executableBytes": 4
+    },
+    {
+      "artifact": "OrvexVaultLeg.sol/OrvexVaultLeg.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "Ownable.sol/Ownable.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "Ownable2Step.sol/Ownable2Step.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "Panic.sol/Panic.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "afterExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "executableBytes": 4
+    },
+    {
+      "artifact": "ReentrancyGuard.sol/ReentrancyGuard.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "ReentrancyGuardTransient.sol/ReentrancyGuardTransient.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "Route.sol/IWrappedNative.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "Route.sol/Route.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "e3ff29d4b9202e722cefc111a8975afc9411ae828905ce92d5d911e6a8ab9ff6",
+      "afterExecutableSha256": "e3ff29d4b9202e722cefc111a8975afc9411ae828905ce92d5d911e6a8ab9ff6",
+      "executableBytes": 5643
+    },
+    {
+      "artifact": "RouteExecutionHub.sol/RouteExecutionHub.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "2cfce52175801730a427e80388dddf21e2fbc9dc1fe07834146a09d3babcd87c",
+      "afterExecutableSha256": "2cfce52175801730a427e80388dddf21e2fbc9dc1fe07834146a09d3babcd87c",
+      "executableBytes": 8403
+    },
+    {
+      "artifact": "RouteExecutor.sol/IExecutorWrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteExecutor.sol/RouteExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "b8d6b9dbbf89cc184cc32853d5c942ebf9e55435ca7f7873239b5509929dcc09",
+      "afterExecutableSha256": "b8d6b9dbbf89cc184cc32853d5c942ebf9e55435ca7f7873239b5509929dcc09",
+      "executableBytes": 5715
+    },
+    {
+      "artifact": "RouteFastExecutor.sol/IFastWrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteFastExecutor.sol/RouteFastExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "2b338babc934efbb3afc347084a673a5c1a407d59314d15b0aa558422acbcc27",
+      "afterExecutableSha256": "2b338babc934efbb3afc347084a673a5c1a407d59314d15b0aa558422acbcc27",
+      "executableBytes": 7320
+    },
+    {
+      "artifact": "RouteFeeExecutor.sol/RouteFeeExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "465459354a78b0694786691ddf23aa6035b9c2ac8fc54ce8c59f8f0f8a791671",
+      "afterExecutableSha256": "465459354a78b0694786691ddf23aa6035b9c2ac8fc54ce8c59f8f0f8a791671",
+      "executableBytes": 5337
+    },
+    {
+      "artifact": "RouteFeeFlywheel.sol/IFlywheelEscrow.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteFeeFlywheel.sol/IFlywheelExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteFeeFlywheel.sol/IFlywheelFactory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteFeeFlywheel.sol/RouteFeeFlywheel.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "3b90d34f24dea23b33ad69f807cad45b09cc0d1dbf48a756e76ca3d22d9f3f5a",
+      "afterExecutableSha256": "3b90d34f24dea23b33ad69f807cad45b09cc0d1dbf48a756e76ca3d22d9f3f5a",
+      "executableBytes": 5200
+    },
+    {
+      "artifact": "RouteFeeFlywheel72h.sol/IFlywheelEscrow.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteFeeFlywheel72h.sol/IFlywheelExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteFeeFlywheel72h.sol/IFlywheelFactory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteFeeFlywheel72h.sol/RouteFeeFlywheel72h.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "ff7c3db01a7089cdf738f42df37e612fd0759ddfd05a40b30e8ddf397921ec33",
+      "afterExecutableSha256": "ff7c3db01a7089cdf738f42df37e612fd0759ddfd05a40b30e8ddf397921ec33",
+      "executableBytes": 5200
+    },
+    {
+      "artifact": "RouteJitV2Executor.sol/IJitV2Factory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteJitV2Executor.sol/IJitV2Pair.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteJitV2Executor.sol/IJitWrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteJitV2Executor.sol/RouteJitV2Executor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "ef5ba6179a484618936e33b1fef3c4885e4d9bd826d4d904f4be34c56c7104a1",
+      "afterExecutableSha256": "ef5ba6179a484618936e33b1fef3c4885e4d9bd826d4d904f4be34c56c7104a1",
+      "executableBytes": 5263
+    },
+    {
+      "artifact": "RouteLeanMetaExecutor.sol/RouteLeanMetaExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "d1467bdb1d38733cb099d1c6876b01901266261e7b4c2675e907df2ddaf23afd",
+      "afterExecutableSha256": "d1467bdb1d38733cb099d1c6876b01901266261e7b4c2675e907df2ddaf23afd",
+      "executableBytes": 2011
+    },
+    {
+      "artifact": "RouteMetaExecutor.sol/RouteMetaExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "bc28c7b70bedda9d0b31636c9949f8b9ccb58d8d397a5af0555b17cfb225f240",
+      "afterExecutableSha256": "bc28c7b70bedda9d0b31636c9949f8b9ccb58d8d397a5af0555b17cfb225f240",
+      "executableBytes": 2247
+    },
+    {
+      "artifact": "RouteMetricExecutor.sol/IRouteMetricFactory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteMetricExecutor.sol/IRouteMetricPool.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteMetricExecutor.sol/IRouteMetricWrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteMetricExecutor.sol/RouteMetricExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "270c9fbc3edb6e17b4b0de8b76753769bb570e3d25d1d076773f4f87b7c440f8",
+      "afterExecutableSha256": "270c9fbc3edb6e17b4b0de8b76753769bb570e3d25d1d076773f4f87b7c440f8",
+      "executableBytes": 5432
+    },
+    {
+      "artifact": "RouteOrderPriceFeed.sol/IOrderAggregator.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrderPriceFeed.sol/RouteOrderPriceFeed.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "7c69181a750bd2215c4e1b8165a60f6f9463aecfef45d82d56197af99265db8f",
+      "afterExecutableSha256": "7c69181a750bd2215c4e1b8165a60f6f9463aecfef45d82d56197af99265db8f",
+      "executableBytes": 1213
+    },
+    {
+      "artifact": "RouteOrderVault.sol/IOrderPriceFeed.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrderVault.sol/IOrderSwapAdapter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrderVault.sol/RouteOrderVault.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "72e575cc5daee2112385afc860a291c1ff7498fe81d0fb798d0b2719e2660dcd",
+      "afterExecutableSha256": "72e575cc5daee2112385afc860a291c1ff7498fe81d0fb798d0b2719e2660dcd",
+      "executableBytes": 6460
+    },
+    {
+      "artifact": "RouteOrvexExecutor.sol/ILeanV2Factory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexExecutor.sol/ILeanV2Pair.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexExecutor.sol/ILeanV2Router.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexExecutor.sol/ILeanV3Factory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexExecutor.sol/ILeanV3Pool.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexExecutor.sol/ILeanV3Router.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexExecutor.sol/IRamsesWrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexExecutor.sol/RouteOrvexExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "9b78a46320336c3dd3be107a773de7aa4a6a4db58d73604d3b9a68a258859415",
+      "afterExecutableSha256": "9b78a46320336c3dd3be107a773de7aa4a6a4db58d73604d3b9a68a258859415",
+      "executableBytes": 13970
+    },
+    {
+      "artifact": "RouteOrvexProbe.sol/IOrvexManager.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexProbe.sol/IOrvexVault.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexProbe.sol/IOrvexWrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteOrvexProbe.sol/RouteOrvexProbe.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "ec511e3e99896cb6909f1393cc17c4296b21181bae3b26fa5544c0a28e706db7",
+      "afterExecutableSha256": "ec511e3e99896cb6909f1393cc17c4296b21181bae3b26fa5544c0a28e706db7",
+      "executableBytes": 4758
+    },
+    {
+      "artifact": "RoutePoolExecutor.sol/ILeanV2Factory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RoutePoolExecutor.sol/ILeanV2Pair.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RoutePoolExecutor.sol/ILeanV2Router.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RoutePoolExecutor.sol/ILeanV3Factory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RoutePoolExecutor.sol/ILeanV3Pool.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RoutePoolExecutor.sol/ILeanV3Router.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RoutePoolExecutor.sol/IRamsesWrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RoutePoolExecutor.sol/RoutePoolExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "f84de021747c33fd36513af90e6f783742266747b5ff1f5d6a1b4fed0acb0bb3",
+      "afterExecutableSha256": "f84de021747c33fd36513af90e6f783742266747b5ff1f5d6a1b4fed0acb0bb3",
+      "executableBytes": 11010
+    },
+    {
+      "artifact": "RouteRamsesExecutor.sol/ILeanV2Factory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteRamsesExecutor.sol/ILeanV2Pair.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteRamsesExecutor.sol/ILeanV2Router.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteRamsesExecutor.sol/IRamsesWrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteRamsesExecutor.sol/RouteRamsesExecutor.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "2cf551c2cb8b71eb53f6095d7fbfcf960a07e7203fabc510c3a28d2b3b9db5fc",
+      "afterExecutableSha256": "2cf551c2cb8b71eb53f6095d7fbfcf960a07e7203fabc510c3a28d2b3b9db5fc",
+      "executableBytes": 9378
+    },
+    {
+      "artifact": "RouteRateOrderVault.sol/RouteRateOrderVault.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "5e3595ac3207106b31cb471762a40aa7b4bcfcdfb9c049cf56c7c2cb75896083",
+      "afterExecutableSha256": "5e3595ac3207106b31cb471762a40aa7b4bcfcdfb9c049cf56c7c2cb75896083",
+      "executableBytes": 6116
+    },
+    {
+      "artifact": "RouteUsdOrderVault.sol/RouteUsdOrderVault.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "238fc471d1136b757801e1c4a61ceb9130bb4accf4e9594f4ece4a6d1c2dfe2e",
+      "afterExecutableSha256": "238fc471d1136b757801e1c4a61ceb9130bb4accf4e9594f4ece4a6d1c2dfe2e",
+      "executableBytes": 8006
+    },
+    {
+      "artifact": "RouteUsdStreamsFeed.sol/IUsdStreamsVerifier.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteUsdStreamsFeed.sol/RouteUsdStreamsFeed.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "d3747c98ae0bce7d3599f43df56ab29b92c76aa7d23cd0f453b06c4ef227f501",
+      "afterExecutableSha256": "d3747c98ae0bce7d3599f43df56ab29b92c76aa7d23cd0f453b06c4ef227f501",
+      "executableBytes": 2175
+    },
+    {
+      "artifact": "RouteV3CallbackProbe.sol/IProbeV3Factory.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteV3CallbackProbe.sol/IProbeV3Pool.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteV3CallbackProbe.sol/IProbeWrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "RouteV3CallbackProbe.sol/RouteV3CallbackProbe.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "4a9186a185a10d2e923bfad863502aa88729ddb9383d26407a4a57b9e70746b4",
+      "afterExecutableSha256": "4a9186a185a10d2e923bfad863502aa88729ddb9383d26407a4a57b9e70746b4",
+      "executableBytes": 3687
+    },
+    {
+      "artifact": "RouteV4SellProbe.sol/RouteV4SellProbe.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "5243d1a4af48bac81bd106a42d91e4cf8b182f17fc327f11d60e60e6b1f07e36",
+      "afterExecutableSha256": "5243d1a4af48bac81bd106a42d91e4cf8b182f17fc327f11d60e60e6b1f07e36",
+      "executableBytes": 3575
+    },
+    {
+      "artifact": "SafeCast.sol/SafeCast.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "afterExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "executableBytes": 4
+    },
+    {
+      "artifact": "SafeERC20.sol/SafeERC20.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "afterExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "executableBytes": 4
+    },
+    {
+      "artifact": "StorageSlot.sol/StorageSlot.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "afterExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "executableBytes": 4
+    },
+    {
+      "artifact": "TransientSlot.sol/TransientSlot.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "afterExecutableSha256": "4f08a0b0f2e301c69290348e9253699de2d7e8d24660cf97106822e70dfefd82",
+      "executableBytes": 4
+    },
+    {
+      "artifact": "V2Adapter.sol/IV2Router.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "V2Adapter.sol/V2Adapter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "a62a103e304e195016fdbb8904fda27ce7f2a2379c40a75d321474d97beb7baa",
+      "afterExecutableSha256": "a62a103e304e195016fdbb8904fda27ce7f2a2379c40a75d321474d97beb7baa",
+      "executableBytes": 2917
+    },
+    {
+      "artifact": "V3Adapter.sol/IV3Quoter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "V3Adapter.sol/IV3Router.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "V3Adapter.sol/V3Adapter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "c98f774a02b0287fc74262338b431483857a8b7fa588e1a47d1240212bc7abd0",
+      "afterExecutableSha256": "c98f774a02b0287fc74262338b431483857a8b7fa588e1a47d1240212bc7abd0",
+      "executableBytes": 3216
+    },
+    {
+      "artifact": "V4Adapter.sol/IRoutePoolManager.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "V4Adapter.sol/IV4Wrapped.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": false,
+      "beforeExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "afterExecutableSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "executableBytes": 0
+    },
+    {
+      "artifact": "V4Adapter.sol/V4Adapter.json",
+      "abiMatches": true,
+      "executableMatches": true,
+      "runtimeMetadataChanged": true,
+      "beforeExecutableSha256": "be6d793b8303c884959ea1a30936705155acbfc1534ecdeb30313c3efe7ecc68",
+      "afterExecutableSha256": "be6d793b8303c884959ea1a30936705155acbfc1534ecdeb30313c3efe7ecc68",
+      "executableBytes": 4378
+    }
+  ]
+}

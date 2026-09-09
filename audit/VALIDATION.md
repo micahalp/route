@@ -1,6 +1,8 @@
 # Validation
 
-## Standalone contract candidate
+## Original standalone contract candidate
+
+The results in this section apply to the original source snapshot at `1bc96e1a1e1737195a84747cca262785b7757b73`. Current formatting checks and bytecode comparison are recorded in [FORMATTING.md](FORMATTING.md).
 
 - Fresh `npm ci --ignore-scripts`: passed; one dependency installed from the pinned lock. npm reported zero known vulnerabilities for this two-package contract workspace, not for the full app.
 - `npm run verify:snapshot`: passed, 66 copied source/evidence files match SHA-256 values.

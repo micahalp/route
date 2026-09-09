@@ -12,8 +12,15 @@ interface IOrderPriceFeed {
 }
 
 interface IOrderSwapAdapter {
-    function swap(address tokenIn, address tokenOut, uint256 amountIn, uint256 minimum,
-        address recipient, uint256 deadline, bytes calldata data) external returns (uint256);
+    function swap(
+        address tokenIn,
+        address tokenOut,
+        uint256 amountIn,
+        uint256 minimum,
+        address recipient,
+        uint256 deadline,
+        bytes calldata data
+    ) external returns (uint256);
 }
 
 /// @notice Experimental, ERC20-only funded orders. Not deployed or approved for use.
@@ -21,9 +28,25 @@ interface IOrderSwapAdapter {
 /// Only ordinary, non-rebasing, exact-transfer tokens are supported.
 contract RouteOrderVault is ReentrancyGuard {
     using SafeERC20 for IERC20;
-    enum Kind { LimitBuy, TakeProfit, StopLoss, Bracket }
-    enum State { Missing, Pending, Entered, Completed, Cancelled }
-    enum Leg { Entry, TakeProfit, StopLoss }
+    enum Kind {
+        LimitBuy,
+        TakeProfit,
+        StopLoss,
+        Bracket
+    }
+    enum State {
+        Missing,
+        Pending,
+        Entered,
+        Completed,
+        Cancelled
+    }
+    enum Leg {
+        Entry,
+        TakeProfit,
+        StopLoss
+    }
+
     struct Terms {
         Kind kind;
         address market;
@@ -38,7 +61,13 @@ contract RouteOrderVault is ReentrancyGuard {
         uint256 stopRate;
         uint64 expiresAt;
     }
-    struct Order { address owner; State state; uint256 held; Terms terms; }
+
+    struct Order {
+        address owner;
+        State state;
+        uint256 held;
+        Terms terms;
+    }
     IOrderPriceFeed public immutable feed;
     IOrderSwapAdapter public immutable adapter;
     uint256 public immutable maxPriceAge;
@@ -56,40 +85,64 @@ contract RouteOrderVault is ReentrancyGuard {
 
     constructor(address priceFeed, address swapAdapter, uint256 age) {
         if (priceFeed.code.length == 0 || swapAdapter.code.length == 0 || age == 0 || age > 1 hours)
+        {
             revert InvalidOrder();
+        }
         feed = IOrderPriceFeed(priceFeed);
         adapter = IOrderSwapAdapter(swapAdapter);
         maxPriceAge = age;
     }
-    function getOrder(uint256 id) external view returns (Order memory) { return orders[id]; }
+
+    function getOrder(uint256 id) external view returns (Order memory) {
+        return orders[id];
+    }
+
     function create(Terms calldata t) external nonReentrant returns (uint256 id) {
-        if (t.market == t.settlement || t.market.code.length == 0 || t.settlement.code.length == 0 ||
-            t.market == address(adapter) || t.settlement == address(adapter) ||
-            t.amount == 0 || t.expiresAt <= block.timestamp || t.expiresAt > block.timestamp + 365 days)
+        if (
+            t.market == t.settlement || t.market.code.length == 0 || t.settlement.code.length == 0
+                || t.market == address(adapter) || t.settlement == address(adapter) || t.amount == 0
+                || t.expiresAt <= block.timestamp || t.expiresAt > block.timestamp + 365 days
+        ) {
             revert InvalidOrder();
+        }
         bool buy = t.kind == Kind.LimitBuy || t.kind == Kind.Bracket;
         bool tp = t.kind == Kind.TakeProfit || t.kind == Kind.Bracket;
         bool sl = t.kind == Kind.StopLoss || t.kind == Kind.Bracket;
-        if ((buy && (t.entryPrice == 0 || t.entryMinimum == 0)) ||
-            (tp && (t.takeProfitPrice == 0 || t.takeProfitRate == 0)) ||
-            (sl && (t.stopPrice == 0 || t.stopRate == 0)) ||
-            (!buy && (t.entryPrice != 0 || t.entryMinimum != 0)) ||
-            (!tp && (t.takeProfitPrice != 0 || t.takeProfitRate != 0)) ||
-            (!sl && (t.stopPrice != 0 || t.stopRate != 0))) revert InvalidOrder();
-        if (t.kind == Kind.Bracket && !(t.stopPrice < t.entryPrice && t.entryPrice < t.takeProfitPrice))
+        if (
+            (buy && (t.entryPrice == 0 || t.entryMinimum == 0))
+                || (tp && (t.takeProfitPrice == 0 || t.takeProfitRate == 0))
+                || (sl && (t.stopPrice == 0 || t.stopRate == 0))
+                || (!buy && (t.entryPrice != 0 || t.entryMinimum != 0))
+                || (!tp && (t.takeProfitPrice != 0 || t.takeProfitRate != 0))
+                || (!sl && (t.stopPrice != 0 || t.stopRate != 0))
+        ) {
             revert InvalidOrder();
+        }
+        if (
+            t.kind == Kind.Bracket
+                && !(t.stopPrice < t.entryPrice && t.entryPrice < t.takeProfitPrice)
+        ) {
+            revert InvalidOrder();
+        }
         address token = buy ? t.settlement : t.market;
         uint256 beforeBalance = IERC20(token).balanceOf(address(this));
         IERC20(token).safeTransferFrom(msg.sender, address(this), t.amount);
-        if (IERC20(token).balanceOf(address(this)) != beforeBalance + t.amount) revert TransferMismatch();
+        if (IERC20(token).balanceOf(address(this)) != beforeBalance + t.amount) {
+            revert TransferMismatch();
+        }
         id = ++nextId;
         orders[id] = Order(msg.sender, State.Pending, t.amount, t);
         emit Created(id, msg.sender);
     }
+
     function cancel(uint256 id) external nonReentrant {
         Order storage o = orders[id];
-        if (o.owner != msg.sender) revert NotOwner();
-        if (o.state != State.Pending && o.state != State.Entered) revert NotEligible();
+        if (o.owner != msg.sender) {
+            revert NotOwner();
+        }
+        if (o.state != State.Pending && o.state != State.Entered) {
+            revert NotEligible();
+        }
         bool buy = o.terms.kind == Kind.LimitBuy || o.terms.kind == Kind.Bracket;
         address token = buy && o.state == State.Pending ? o.terms.settlement : o.terms.market;
         uint256 amount = o.held;
@@ -98,34 +151,63 @@ contract RouteOrderVault is ReentrancyGuard {
         _deliver(token, o.owner, amount);
         emit Cancelled(id, token, amount);
     }
-    function execution(uint256 id, Leg leg) public view returns
-        (address tokenIn, address tokenOut, uint256 amount, uint256 minimum) {
+
+    function execution(uint256 id, Leg leg)
+        public
+        view
+        returns (address tokenIn, address tokenOut, uint256 amount, uint256 minimum)
+    {
         Order storage o = orders[id];
         Terms storage t = o.terms;
-        if ((o.state != State.Pending && o.state != State.Entered) || block.timestamp >= t.expiresAt)
+        if (
+            (o.state != State.Pending && o.state != State.Entered) || block.timestamp >= t.expiresAt
+        ) {
             revert NotEligible();
+        }
         (uint256 value, uint256 updatedAt) = feed.price(t.market);
-        if (value == 0 || updatedAt == 0 || updatedAt > block.timestamp || block.timestamp - updatedAt > maxPriceAge)
+        if (
+            value == 0 || updatedAt == 0 || updatedAt > block.timestamp
+                || block.timestamp - updatedAt > maxPriceAge
+        ) {
             revert StalePrice();
+        }
         bool entry = leg == Leg.Entry;
         if (entry) {
-            if (o.state != State.Pending || (t.kind != Kind.LimitBuy && t.kind != Kind.Bracket) || value > t.entryPrice)
+            if (
+                o.state != State.Pending || (t.kind != Kind.LimitBuy && t.kind != Kind.Bracket)
+                    || value > t.entryPrice
+            ) {
                 revert NotEligible();
+            }
             return (t.settlement, t.market, o.held, t.entryMinimum);
         }
-        if (t.kind == Kind.Bracket ? o.state != State.Entered : o.state != State.Pending) revert NotEligible();
+        if (t.kind == Kind.Bracket ? o.state != State.Entered : o.state != State.Pending) {
+            revert NotEligible();
+        }
         uint256 rate;
         if (leg == Leg.TakeProfit) {
-            if ((t.kind != Kind.TakeProfit && t.kind != Kind.Bracket) || value < t.takeProfitPrice) revert NotEligible();
+            if ((t.kind != Kind.TakeProfit && t.kind != Kind.Bracket) || value < t.takeProfitPrice)
+            {
+                revert NotEligible();
+            }
             rate = t.takeProfitRate;
         } else {
-            if ((t.kind != Kind.StopLoss && t.kind != Kind.Bracket) || value > t.stopPrice) revert NotEligible();
+            if ((t.kind != Kind.StopLoss && t.kind != Kind.Bracket) || value > t.stopPrice) {
+                revert NotEligible();
+            }
             rate = t.stopRate;
         }
         return (t.market, t.settlement, o.held, Math.mulDiv(o.held, rate, 1e18, Math.Rounding.Ceil));
     }
-    function execute(uint256 id, Leg leg, bytes calldata data) external nonReentrant returns (uint256 output) {
-        if (data.length > 65536) revert InvalidOrder();
+
+    function execute(uint256 id, Leg leg, bytes calldata data)
+        external
+        nonReentrant
+        returns (uint256 output)
+    {
+        if (data.length > 65536) {
+            revert InvalidOrder();
+        }
         (address tokenIn, address tokenOut, uint256 amount, uint256 minimum) = execution(id, leg);
         Order storage o = orders[id];
         uint256 beforeIn = IERC20(tokenIn).balanceOf(address(this));
@@ -136,20 +218,31 @@ contract RouteOrderVault is ReentrancyGuard {
         IERC20(tokenIn).forceApprove(address(adapter), amount);
         adapter.swap(tokenIn, tokenOut, amount, minimum, address(this), o.terms.expiresAt, data);
         IERC20(tokenIn).forceApprove(address(adapter), 0);
-        if (IERC20(tokenIn).balanceOf(address(this)) != beforeIn - amount) revert TransferMismatch();
+        if (IERC20(tokenIn).balanceOf(address(this)) != beforeIn - amount) {
+            revert TransferMismatch();
+        }
         output = IERC20(tokenOut).balanceOf(address(this)) - beforeOut;
-        if (output < minimum) revert MinimumNotMet();
+        if (output < minimum) {
+            revert MinimumNotMet();
+        }
         if (leg == Leg.Entry && o.terms.kind == Kind.Bracket) {
             o.held = output;
             o.state = State.Entered;
-        } else _deliver(tokenOut, o.owner, output);
+        } else {
+            _deliver(tokenOut, o.owner, output);
+        }
         emit Filled(id, leg, amount, output);
     }
+
     function _deliver(address token, address owner, uint256 amount) private {
         uint256 vaultBefore = IERC20(token).balanceOf(address(this));
         uint256 ownerBefore = IERC20(token).balanceOf(owner);
         IERC20(token).safeTransfer(owner, amount);
-        if (IERC20(token).balanceOf(address(this)) != vaultBefore - amount ||
-            IERC20(token).balanceOf(owner) != ownerBefore + amount) revert TransferMismatch();
+        if (
+            IERC20(token).balanceOf(address(this)) != vaultBefore - amount
+                || IERC20(token).balanceOf(owner) != ownerBefore + amount
+        ) {
+            revert TransferMismatch();
+        }
     }
 }

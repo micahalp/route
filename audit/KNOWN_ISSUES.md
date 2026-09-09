@@ -1,8 +1,8 @@
 # Known issues and handoff limits
 
 1. No independent security audit has been completed. Passing tests do not establish absence of exploitable bugs.
-2. Historical NatSpec in RoutePoolExecutor, RouteLeanMetaExecutor and RouteFeeFlywheel72h still says experimental/not deployed. It is preserved byte-for-byte for source provenance. Consult SCOPE.md and runtime evidence rather than using those comments as current deployment status.
-3. The original application README names RouteExecutor for direct settlement, while the active registry selects RoutePoolExecutor. This candidate's scope table corrects the handoff description without rewriting compiled Solidity metadata.
+2. Outdated deployment-status comments in RoutePoolExecutor, RouteLeanMetaExecutor and RouteFeeFlywheel72h were corrected during formatting. Exact historical source remains at baseline commit `1bc96e1a1e1737195a84747cca262785b7757b73`; see FORMATTING.md for the metadata distinction and comparison evidence.
+3. The original application README names RouteExecutor for direct settlement, while the active registry selects RoutePoolExecutor. This candidate's scope table identifies the active contract.
 4. The source working tree contains uncommitted work. SNAPSHOT.json records exact file hashes; the source commit alone is not this snapshot.
 5. Local unit tests use mocks and test harnesses, including injected factories and simplified pools. Historical fork tests are excluded from the default command. Real state, third-party hooks and production execution remain separate checks.
 6. Optional order/USD modules have mixed preview and local status. Their feeds, deployment configuration and worker integration must be reviewed before release; this audit package does not authorize deployment.
