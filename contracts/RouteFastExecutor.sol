@@ -85,13 +85,13 @@ contract RouteFastExecutor is ReentrancyGuard {
             if (!allowedAdapter[fastV3] || fastV3 == v4) {
                 revert InvalidRoute();
             }
-            target = V3Adapter(fastV3).dexRouter();
+            target = V3Adapter(payable(fastV3)).dexRouter();
             if (target.code.length == 0) {
                 revert InvalidRoute();
             }
             // Snapshot the immutable V3 adapter configuration, not caller data.
             for (uint256 i; i < 4; ++i) {
-                try V3Adapter(fastV3).feeTiers(i) returns (uint24 fee) {
+                try V3Adapter(payable(fastV3)).feeTiers(i) returns (uint24 fee) {
                     if (fee == 0 || fee >= 1_000_000) {
                         revert InvalidRoute();
                     }

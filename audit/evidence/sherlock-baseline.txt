@@ -1,0 +1,31 @@
+Compiling 81 files with Solc 0.8.30
+Solc 0.8.30 finished in 76.95s
+Compiler run successful with warnings:
+Warning (5159): "selfdestruct" has been deprecated. Note that, starting from the Cancun hard fork, the underlying opcode no longer deletes the code and data associated with an account and only transfers its Ether to the beneficiary, unless executed in the same transaction in which the contract was created (see EIP-6780). Any use in newly deployed contracts is strongly discouraged even if the new behavior is taken into account. Future changes to the EVM might further reduce the functionality of the opcode.
+  --> contracts/test/RouteOrvexProbeFork.t.sol:18:9:
+   |
+18 |         selfdestruct(target);
+   |         ^^^^^^^^^^^^
+
+2026-09-17T20:41:57.062360Z  WARN evm::traces::external: etherscan config not found
+
+Ran 5 tests for contracts/test/SherlockRegression.t.sol:SherlockRegressionTest
+[FAIL: ISSUE11: residual ETH blocked swap; counterexample: calldata=0x3fc54c77000000000000000000000000000000000000000000000043763bfd4d881d4efa args=[1244451534568079314682 [1.244e21]]] testFuzzIssue11ResidualNative(uint96) (runs: 0, μ: 0, ~: 0)
+[PASS] testIssue11PartialFillStillRejected() (gas: 1795461)
+[FAIL: ISSUE11: residual ETH blocked swap] testIssue11ResidualNativeCannotBlockWethSwap() (gas: 1768174)
+[FAIL: ISSUE12: unrelated entitlement passed minOut] testIssue12ClaimCannotReplaceSwapOutput() (gas: 167982)
+[FAIL: ISSUE12: partialFill output plus entitlement passed] testIssue12PartialOutputPlusClaimCannotPass() (gas: 176107)
+Suite result: FAILED. 1 passed; 4 failed; 0 skipped; finished in 34.64ms (34.56ms CPU time)
+
+Ran 1 test suite in 60.60ms (34.64ms CPU time): 1 tests passed, 4 failed, 0 skipped (5 total tests)
+
+Failing tests:
+Encountered 4 failing tests in contracts/test/SherlockRegression.t.sol:SherlockRegressionTest
+[FAIL: ISSUE11: residual ETH blocked swap; counterexample: calldata=0x3fc54c77000000000000000000000000000000000000000000000043763bfd4d881d4efa args=[1244451534568079314682 [1.244e21]]] testFuzzIssue11ResidualNative(uint96) (runs: 0, μ: 0, ~: 0)
+[FAIL: ISSUE11: residual ETH blocked swap] testIssue11ResidualNativeCannotBlockWethSwap() (gas: 1768174)
+[FAIL: ISSUE12: unrelated entitlement passed minOut] testIssue12ClaimCannotReplaceSwapOutput() (gas: 167982)
+[FAIL: ISSUE12: partialFill output plus entitlement passed] testIssue12PartialOutputPlusClaimCannotPass() (gas: 176107)
+
+Encountered a total of 4 failing tests, 1 tests succeeded
+
+Tip: Run `forge test --rerun` to retry only the 4 failed tests

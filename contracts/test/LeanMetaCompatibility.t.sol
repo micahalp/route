@@ -42,18 +42,17 @@ contract LeanMetaCompatibilityTest {
         token.approve(address(current), 1 ether);
     }
 
-    function testLeanNativeForwardingRejectionIsAtomic() public {
+    function testLeanNativeForwardingRecipientNowSupported() public {
         bytes memory data = abi.encodeCall(
-            MockUpstream.swap, (address(token), address(0), 1 ether, 2 ether, address(recipient))
+            MockUpstream.swap, (address(token), address(0), 1 ether, 2 ether, address(lean))
         );
         vm.prank(user);
-        vm.expectRevert(RouteLeanMetaExecutor.SlippageExceeded.selector);
         lean.swap(
             address(token), address(0), 1 ether, 2 ether, address(recipient), block.timestamp, data
         );
-        require(destination.balance == 0 && address(recipient).balance == 0);
-        require(token.balanceOf(user) == 10 ether && token.balanceOf(address(upstream)) == 0);
-        require(token.allowance(user, address(lean)) == 1 ether);
+        require(destination.balance == 2 ether && address(recipient).balance == 0);
+        require(token.balanceOf(user) == 9 ether && token.balanceOf(address(upstream)) == 1 ether);
+        require(token.allowance(user, address(lean)) == 0);
         require(token.allowance(address(lean), address(upstream)) == 0);
     }
 
@@ -88,8 +87,7 @@ contract LeanMetaCompatibilityTest {
         Token output = new Token("Output");
         output.mint(address(upstream), 2 ether);
         bytes memory data = abi.encodeCall(
-            MockUpstream.swap,
-            (address(token), address(output), 1 ether, 2 ether, address(recipient))
+            MockUpstream.swap, (address(token), address(output), 1 ether, 2 ether, address(lean))
         );
         vm.prank(user);
         require(

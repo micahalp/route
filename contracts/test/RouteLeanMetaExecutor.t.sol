@@ -54,7 +54,8 @@ contract RouteLeanMetaExecutorTest {
         view
         returns (bytes memory)
     {
-        return abi.encodeCall(MockUpstream.swap, (address(a), address(b), amount, output, receiver));
+        address custody = receiver == recipient || receiver == user ? address(guard) : receiver;
+        return abi.encodeCall(MockUpstream.swap, (address(a), address(b), amount, output, custody));
     }
 
     function execute(uint256 amount, uint256 minimum, address receiver, bytes memory data)
@@ -65,7 +66,7 @@ contract RouteLeanMetaExecutorTest {
         return guard.swap(address(a), address(b), amount, minimum, receiver, block.timestamp, data);
     }
 
-    function testExactSpendDirectRecipientAndNoAllowance() public {
+    function testExactSpendCustodyThenRecipientAndNoAllowance() public {
         require(
             execute(1 ether, 2 ether, recipient, payload(1 ether, 2 ether, recipient)) == 2 ether
         );
@@ -88,9 +89,12 @@ contract RouteLeanMetaExecutorTest {
         execute(1 ether, 2 ether, recipient, payload(1 ether, 2 ether, address(0xBAD)));
     }
 
-    function testOutputSentToGuardRejected() public {
-        vm.expectRevert(RouteLeanMetaExecutor.UnsupportedToken.selector);
-        execute(1 ether, 2 ether, recipient, payload(1 ether, 2 ether, address(guard)));
+    function testDirectRecipientDeliveryRejected() public {
+        bytes memory data = abi.encodeCall(
+            MockUpstream.swap, (address(a), address(b), 1 ether, 2 ether, recipient)
+        );
+        vm.expectRevert(RouteLeanMetaExecutor.SlippageExceeded.selector);
+        execute(1 ether, 2 ether, recipient, data);
     }
 
     function testPartialInputRejected() public {
@@ -163,7 +167,7 @@ contract RouteLeanMetaExecutorTest {
 
     function testNativeInput() public {
         bytes memory data = abi.encodeCall(
-            MockUpstream.swap, (address(0), address(b), 1 ether, 2 ether, recipient)
+            MockUpstream.swap, (address(0), address(b), 1 ether, 2 ether, address(guard))
         );
         vm.prank(user);
         require(
@@ -175,8 +179,9 @@ contract RouteLeanMetaExecutorTest {
     }
 
     function testNativeOutput() public {
-        bytes memory data =
-            abi.encodeCall(MockUpstream.swap, (address(a), address(0), 1 ether, 2 ether, user));
+        bytes memory data = abi.encodeCall(
+            MockUpstream.swap, (address(a), address(0), 1 ether, 2 ether, address(guard))
+        );
         vm.prank(user);
         require(
             guard.swap(address(a), address(0), 1 ether, 2 ether, user, block.timestamp, data)
@@ -214,7 +219,7 @@ contract RouteLeanMetaExecutorTest {
     function testRecipientReentryBlocked() public {
         LeanReentrantRecipient receiver = new LeanReentrantRecipient(guard, false);
         bytes memory data = abi.encodeCall(
-            MockUpstream.swap, (address(a), address(0), 1 ether, 2 ether, address(receiver))
+            MockUpstream.swap, (address(a), address(0), 1 ether, 2 ether, address(guard))
         );
         vm.prank(user);
         require(
@@ -226,13 +231,27 @@ contract RouteLeanMetaExecutorTest {
         require(a.allowance(address(guard), address(upstream)) == 0);
     }
 
+    function testTaxedFinalOutputRollsBack() public {
+        TaxToken taxed = new TaxToken();
+        taxed.mint(address(upstream), 2 ether);
+        bytes memory data = abi.encodeCall(
+            MockUpstream.swap, (address(a), address(taxed), 1 ether, 2 ether, address(guard))
+        );
+        vm.prank(user);
+        vm.expectRevert(RouteLeanMetaExecutor.UnsupportedToken.selector);
+        guard.swap(address(a), address(taxed), 1 ether, 1.9 ether, recipient, block.timestamp, data);
+        require(a.balanceOf(user) == 100 ether && taxed.balanceOf(recipient) == 0);
+        require(taxed.balanceOf(address(upstream)) == 2 ether);
+        require(a.allowance(address(guard), address(upstream)) == 0);
+    }
+
     function testRejectingRecipientRollsBackInputAndApproval() public {
         LeanReentrantRecipient receiver = new LeanReentrantRecipient(guard, true);
         bytes memory data = abi.encodeCall(
-            MockUpstream.swap, (address(a), address(0), 1 ether, 2 ether, address(receiver))
+            MockUpstream.swap, (address(a), address(0), 1 ether, 2 ether, address(guard))
         );
         vm.prank(user);
-        vm.expectRevert(RouteLeanMetaExecutor.UpstreamReverted.selector);
+        vm.expectRevert(RouteLeanMetaExecutor.InvalidSwap.selector);
         guard.swap(
             address(a), address(0), 1 ether, 2 ether, address(receiver), block.timestamp, data
         );
