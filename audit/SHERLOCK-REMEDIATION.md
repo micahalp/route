@@ -1,5 +1,7 @@
 # Sherlock findings 11 and 12 — local remediation candidate
 
+September 18 submission update: the owner authorized publishing this remediation to a review branch in `micahalp/route`. The private Sherlock repository rejected the micahalp push with HTTP 403. This source-repository PR is the submission candidate; earlier local-only status and private-channel steps below describe preparation history. Main and deployed contracts remain unchanged. Auditor acceptance and fix review are still pending.
+
 September 17, 2026. These are fixes for the deprecated audit snapshot, not a production release or auditor-approved resolution.
 
 Audited source: `micahalp/route` commit `d9958f70d024955bfb1446ea4f62c403e4c1dabf`. Sherlock repository snapshot: `6d77f7504851a8e6e112c42edb9288f6853d9d30`, under `route/`. The audit repository is private and the source repository is public. This package has not been pushed, posted, or submitted. Account micahalp can read but cannot push or triage the Sherlock repository. Confirm the private remediation submission channel before publishing a PR.
