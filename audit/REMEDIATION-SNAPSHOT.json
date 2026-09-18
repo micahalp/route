@@ -25,6 +25,36 @@
       "path": "contracts/test/SherlockIssue12.t.sol",
       "sha256": "5dc24ef6b8a1019a145bfd6679c324a79ff7ea0ef0d81cd180e6fd0577d0d937",
       "bytes": 4807
+    },
+    {
+      "path": "contracts/adapters/V3Adapter.sol",
+      "sha256": "a745156939e57162a1d5d6d8b12719a80312e00539dec7ac7c530f7cb5549dd7",
+      "bytes": 4804
+    },
+    {
+      "path": "contracts/RoutePoolExecutor.sol",
+      "sha256": "74a1a9bb05b38dd10f18d11a729ba595630cf8fb34a32e0ecbc6cef1a711ec16",
+      "bytes": 21407
+    },
+    {
+      "path": "contracts/RouteFastExecutor.sol",
+      "sha256": "56f433113a9dd888267942d88af4bc0035a9c6757474553b8696e1fb223b01f9",
+      "bytes": 11373
+    },
+    {
+      "path": "contracts/RouteRamsesExecutor.sol",
+      "sha256": "ff428577532cd9f8e4a2e20529359f0cf84a83c1590e2446d9c17e73aa3b7825",
+      "bytes": 16943
+    },
+    {
+      "path": "contracts/experimental/RouteOrvexExecutor.sol",
+      "sha256": "38605c6095d912388d1d0d68b0b9765d90c39402f95b41e960ca3901e5c03554",
+      "bytes": 22452
+    },
+    {
+      "path": "contracts/test/SherlockIssue11.t.sol",
+      "sha256": "04f052f2bd8aef2288ecb137b6826757917985c679c11b39b6d484d6998cb28d",
+      "bytes": 6903
     }
   ]
 }
