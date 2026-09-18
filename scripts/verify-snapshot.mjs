@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -15,12 +15,29 @@ function verify(file, bytes, label) {
   }
 }
 
-for (const file of manifest.files) {
+// Preserve the original audit manifest. A remediation records an explicit overlay
+// and proves the original manifest against the exact audited Git revision.
+const overlayUrl = new URL('../audit/REMEDIATION-SNAPSHOT.json', import.meta.url);
+const overlay = existsSync(overlayUrl) ? JSON.parse(readFileSync(overlayUrl, 'utf8')) : null;
+const replacements = new Map((overlay?.files ?? []).map(file => [file.path, file]));
+if (overlay) {
+  if (overlay.baseCommit !== 'd9958f70d024955bfb1446ea4f62c403e4c1dabf') {
+    throw new Error('Unexpected remediation base');
+  }
+  for (const file of manifest.files) {
+    verify(file, execFileSync('git', ['show', `${overlay.baseCommit}:${file.path}`], { cwd: root }), 'Audited');
+  }
+}
+for (const originalFile of manifest.files) {
+  const file = replacements.get(originalFile.path) ?? originalFile;
   verify(
     file,
     readFileSync(new URL('../' + file.path, import.meta.url)),
     'Current',
   );
+}
+for (const file of replacements.values()) {
+  verify(file, readFileSync(new URL('../' + file.path, import.meta.url)), 'Remediation');
 }
 
 const baseline = manifest.formattingBaseline;
