@@ -124,13 +124,13 @@ contract RoutePoolExecutor is ReentrancyGuardTransient {
             if (!allowedAdapter[fastV3] || fastV3 == v4) {
                 revert InvalidRoute();
             }
-            target = V3Adapter(fastV3).dexRouter();
+            target = V3Adapter(payable(fastV3)).dexRouter();
             if (target.code.length == 0) {
                 revert InvalidRoute();
             }
             // Snapshot the immutable V3 adapter configuration, not caller data.
             for (uint256 i; i < 4; ++i) {
-                try V3Adapter(fastV3).feeTiers(i) returns (uint24 fee) {
+                try V3Adapter(payable(fastV3)).feeTiers(i) returns (uint24 fee) {
                     if (fee == 0 || fee >= 1_000_000) {
                         revert InvalidRoute();
                     }
@@ -418,6 +418,13 @@ contract RoutePoolExecutor is ReentrancyGuardTransient {
                     : leg.adapter == fastV2Adapter ? fastV2Router : leg.adapter;
                 address pairFactory = leg.adapter == fastV2Adapter ? _v2PairFactory() : address(0);
                 address poolFactory = leg.adapter == fastV3Adapter ? _v3PoolFactory() : address(0);
+                // The router fallback must not bypass the adapter's residual-ETH
+                // handling. Direct pool callbacks have no router payment branch.
+                bool normalizeV3 = leg.adapter == fastV3Adapter && poolFactory == address(0)
+                    && current == address(wrappedNative) && fastV3Router.balance != 0;
+                if (normalizeV3) {
+                    spender = leg.adapter;
+                }
                 uint256 expectedDirectOutput;
                 if (pairFactory == address(0) && poolFactory == address(0)) {
                     IERC20(current).forceApprove(spender, amount);
@@ -452,12 +459,16 @@ contract RoutePoolExecutor is ReentrancyGuardTransient {
                     if (!isFastV3Fee(leg.fee)) {
                         revert InvalidRoute();
                     }
-                    IV3Router(fastV3Router)
-                        .exactInputSingle(
-                            IV3Router.Params(
-                                current, leg.tokenOut, leg.fee, address(this), amount, 1, 0
-                            )
-                        );
+                    if (normalizeV3) {
+                        IRouteAdapter(leg.adapter).swap(current, leg.tokenOut, amount, 1, leg.fee);
+                    } else {
+                        IV3Router(fastV3Router)
+                            .exactInputSingle(
+                                IV3Router.Params(
+                                    current, leg.tokenOut, leg.fee, address(this), amount, 1, 0
+                                )
+                            );
+                    }
                 } else if (leg.adapter == fastV2Adapter) {
                     if (leg.fee != 0) {
                         revert InvalidRoute();

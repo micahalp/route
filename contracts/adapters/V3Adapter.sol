@@ -2,6 +2,17 @@
 pragma solidity ^0.8.30;
 
 import {BaseAdapter} from "./BaseAdapter.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+
+interface IV3NativePayments {
+    function WETH9() external view returns (address);
+    function refundETH() external payable;
+}
+
+interface IV3WrappedNative {
+    function deposit() external payable;
+}
 
 interface IV3Quoter {
     struct Params {
@@ -31,8 +42,44 @@ interface IV3Router {
 
 /// @notice Uniswap V3 SwapRouter02 + QuoterV2. Not compatible with the older deadline-bearing router ABI.
 contract V3Adapter is BaseAdapter {
+    using SafeERC20 for IERC20;
     address public immutable quoter;
     uint24[] public feeTiers;
+
+    receive() external payable {
+        if (msg.sender != dexRouter) {
+            revert InvalidSwap();
+        }
+    }
+
+    // Keep unsolicited router funds at the router, denominated in WETH instead
+    // of ETH. Refunding them to our caller could violate an outer exact-input
+    // invariant. Router WETH remains recoverable through its public sweepToken.
+    function _normalizeRouterNative(address tokenIn) private {
+        if (dexRouter.balance == 0) {
+            return;
+        }
+        if (IV3NativePayments(dexRouter).WETH9() != tokenIn) {
+            return;
+        }
+        uint256 nativeBefore = address(this).balance;
+        uint256 tokenBefore = IERC20(tokenIn).balanceOf(address(this));
+        IV3NativePayments(dexRouter).refundETH();
+        uint256 refunded = address(this).balance - nativeBefore;
+        if (refunded != 0) {
+            IV3WrappedNative(tokenIn).deposit{value: refunded}();
+            if (IERC20(tokenIn).balanceOf(address(this)) != tokenBefore + refunded) {
+                revert UnsupportedToken();
+            }
+            IERC20(tokenIn).safeTransfer(dexRouter, refunded);
+        }
+        if (
+            address(this).balance != nativeBefore || dexRouter.balance != 0
+                || IERC20(tokenIn).balanceOf(address(this)) != tokenBefore
+        ) {
+            revert UnsupportedToken();
+        }
+    }
 
     constructor(string memory label, address router, address quoteContract, uint24[] memory fees)
         BaseAdapter(label, router)
@@ -93,6 +140,7 @@ contract V3Adapter is BaseAdapter {
         if (!supported) {
             revert InvalidSwap();
         }
+        _normalizeRouterNative(tokenIn);
         IV3Router(dexRouter)
             .exactInputSingle(
                 IV3Router.Params(tokenIn, tokenOut, fee, address(this), amountIn, minOut, 0)
