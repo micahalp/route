@@ -1,0 +1,30 @@
+Compiling 81 files with Solc 0.8.30
+Solc 0.8.30 finished in 84.75s
+Compiler run successful with warnings:
+Warning (5159): "selfdestruct" has been deprecated. Note that, starting from the Cancun hard fork, the underlying opcode no longer deletes the code and data associated with an account and only transfers its Ether to the beneficiary, unless executed in the same transaction in which the contract was created (see EIP-6780). Any use in newly deployed contracts is strongly discouraged even if the new behavior is taken into account. Future changes to the EVM might further reduce the functionality of the opcode.
+  --> contracts/test/RouteOrvexProbeFork.t.sol:18:9:
+   |
+18 |         selfdestruct(target);
+   |         ^^^^^^^^^^^^
+
+2026-09-17T20:46:05.141219Z  WARN evm::traces::external: etherscan config not found
+
+Ran 4 tests for contracts/test/SherlockRegression.t.sol:SherlockRegressionTest
+[FAIL: UnsupportedToken()] testIssue11PoolFallbackDoesNotBypassNormalization() (gas: 4683711)
+[FAIL: ISSUE11: residual ETH blocked swap] testIssue11ResidualNativeCannotBlockWethSwap() (gas: 1768342)
+[FAIL: ISSUE12: unrelated entitlement passed minOut] testIssue12ClaimCannotReplaceSwapOutput() (gas: 168048)
+[FAIL: ISSUE12: partialFill output plus entitlement passed] testIssue12PartialOutputPlusClaimCannotPass() (gas: 176107)
+Suite result: FAILED. 0 passed; 4 failed; 0 skipped; finished in 1.51ms (1.88ms CPU time)
+
+Ran 1 test suite in 9.28ms (1.51ms CPU time): 0 tests passed, 4 failed, 0 skipped (4 total tests)
+
+Failing tests:
+Encountered 4 failing tests in contracts/test/SherlockRegression.t.sol:SherlockRegressionTest
+[FAIL: UnsupportedToken()] testIssue11PoolFallbackDoesNotBypassNormalization() (gas: 4683711)
+[FAIL: ISSUE11: residual ETH blocked swap] testIssue11ResidualNativeCannotBlockWethSwap() (gas: 1768342)
+[FAIL: ISSUE12: unrelated entitlement passed minOut] testIssue12ClaimCannotReplaceSwapOutput() (gas: 168048)
+[FAIL: ISSUE12: partialFill output plus entitlement passed] testIssue12PartialOutputPlusClaimCannotPass() (gas: 176107)
+
+Encountered a total of 4 failing tests, 0 tests succeeded
+
+Tip: Run `forge test --rerun` to retry only the 4 failed tests

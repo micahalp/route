@@ -56,8 +56,9 @@ contract RouteOrderSettlementTest {
         uint256 amount,
         uint256 received,
         address recipient
-    ) internal pure returns (bytes memory) {
-        return abi.encodeCall(MockUpstream.swap, (input, output, amount, received, recipient));
+    ) internal view returns (bytes memory) {
+        address custody = recipient == address(vault) ? address(executor) : recipient;
+        return abi.encodeCall(MockUpstream.swap, (input, output, amount, received, custody));
     }
 
     function enter(uint256 id, uint256 amount, uint256 received, address recipient) internal {

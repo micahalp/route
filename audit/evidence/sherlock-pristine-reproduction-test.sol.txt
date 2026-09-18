@@ -1,0 +1,275 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.30;
+
+import {RouteLeanMetaExecutor} from "../RouteLeanMetaExecutor.sol";
+import {V3Adapter, IV3Router} from "../adapters/V3Adapter.sol";
+import {Token, Wrapped, Vm} from "./Route.t.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {RoutePoolExecutor} from "../RoutePoolExecutor.sol";
+import {RamsesMock, RamsesFactoryMock} from "./RouteRamsesExecutor.t.sol";
+
+// A pre-existing entitlement, not freshly donated swap proceeds.
+contract OwedRewards {
+    Token immutable token;
+    mapping(address => uint256) public owed;
+
+    constructor(Token t) {
+        token = t;
+    }
+
+    function fund(address recipient, uint256 amount) external {
+        token.transferFrom(msg.sender, address(this), amount);
+        owed[recipient] += amount;
+    }
+
+    function claim(address recipient) external {
+        uint256 amount = owed[recipient];
+        owed[recipient] = 0;
+        token.transfer(recipient, amount);
+    }
+}
+
+contract ClaimingUpstream {
+    address constant thief = address(0xBAD);
+
+    function swap(
+        Token input,
+        Token output,
+        OwedRewards rewards,
+        address recipient,
+        address outputReceiver,
+        uint256 genuineOutput
+    ) external {
+        input.transferFrom(msg.sender, thief, 1 ether);
+        if (genuineOutput != 0) {
+            output.transfer(outputReceiver, genuineOutput);
+        }
+        rewards.claim(recipient);
+    }
+}
+
+// Models the upstream PeripheryPayments.pay branch and permissionless refund.
+contract NativeFirstV3 {
+    Wrapped public immutable WETH9;
+    bool public partialFill;
+
+    constructor(Wrapped w) {
+        WETH9 = w;
+    }
+
+    function setPartial() external {
+        partialFill = true;
+    }
+
+    function refundETH() external payable {
+        (bool ok,) = msg.sender.call{value: address(this).balance}("");
+        require(ok);
+    }
+
+    function exactInputSingle(IV3Router.Params calldata p) external payable returns (uint256) {
+        uint256 payment = partialFill ? p.amountIn / 2 : p.amountIn;
+        if (p.tokenIn == address(WETH9) && address(this).balance >= payment) {
+            WETH9.deposit{value: payment}();
+            WETH9.transfer(address(0xB001), payment);
+        } else {
+            IERC20(p.tokenIn).transferFrom(msg.sender, address(0xB001), payment);
+        }
+        uint256 out = p.amountIn * 2;
+        require(out >= p.amountOutMinimum);
+        IERC20(p.tokenOut).transfer(p.recipient, out);
+        return out;
+    }
+}
+
+contract SherlockRegressionTest {
+    Vm constant vm = Vm(address(uint160(uint256(keccak256("hevm cheat code")))));
+    Token input;
+    Token output;
+    OwedRewards rewards;
+    ClaimingUpstream upstream;
+    RouteLeanMetaExecutor guard;
+    address recipient = address(0xCAFE);
+
+    function setUp() public {
+        input = new Token("IN");
+        output = new Token("OUT");
+        rewards = new OwedRewards(output);
+        upstream = new ClaimingUpstream();
+        guard = new RouteLeanMetaExecutor(address(upstream), ClaimingUpstream.swap.selector);
+        input.mint(address(this), 1 ether);
+        input.approve(address(guard), 1 ether);
+        output.mint(address(this), 2 ether);
+        output.approve(address(rewards), 2 ether);
+        rewards.fund(recipient, 2 ether);
+        output.mint(address(upstream), 2 ether);
+    }
+
+    function testIssue12ClaimCannotReplaceSwapOutput() public {
+        bytes memory data =
+            abi.encodeCall(upstream.swap, (input, output, rewards, recipient, address(guard), 0));
+        (bool ok,) = address(guard)
+            .call(
+                abi.encodeCall(
+                    guard.swap,
+                    (
+                        address(input),
+                        address(output),
+                        1 ether,
+                        2 ether,
+                        recipient,
+                        block.timestamp,
+                        data
+                    )
+                )
+            );
+        require(!ok, "ISSUE12: unrelated entitlement passed minOut");
+        require(rewards.owed(recipient) == 2 ether && output.balanceOf(recipient) == 0);
+        require(input.balanceOf(address(this)) == 1 ether && input.balanceOf(address(0xBAD)) == 0);
+    }
+
+    function testIssue12PartialOutputPlusClaimCannotPass() public {
+        bytes memory data =
+            abi.encodeCall(upstream.swap, (input, output, rewards, recipient, recipient, 1 ether));
+        (bool ok,) = address(guard)
+            .call(
+                abi.encodeCall(
+                    guard.swap,
+                    (
+                        address(input),
+                        address(output),
+                        1 ether,
+                        2 ether,
+                        recipient,
+                        block.timestamp,
+                        data
+                    )
+                )
+            );
+        require(!ok, "ISSUE12: partialFill output plus entitlement passed");
+        require(rewards.owed(recipient) == 2 ether);
+    }
+
+    function testIssue12GenuineOutputExcludesConcurrentClaim() public {
+        bytes memory data = abi.encodeCall(
+            upstream.swap, (input, output, rewards, recipient, address(guard), 2 ether)
+        );
+        uint256 amount = guard.swap(
+            address(input), address(output), 1 ether, 2 ether, recipient, block.timestamp, data
+        );
+        require(amount == 2 ether && output.balanceOf(recipient) == 4 ether);
+        require(output.balanceOf(address(guard)) == 0);
+    }
+
+    function testFuzzIssue12ShortfallCannotBeCoveredByClaim(uint96 raw) public {
+        uint256 genuine = uint256(raw) % 2 ether;
+        bytes memory data = abi.encodeCall(
+            upstream.swap, (input, output, rewards, recipient, address(guard), genuine)
+        );
+        vm.expectRevert(RouteLeanMetaExecutor.SlippageExceeded.selector);
+        guard.swap(
+            address(input), address(output), 1 ether, 2 ether, recipient, block.timestamp, data
+        );
+        require(rewards.owed(recipient) == 2 ether && input.balanceOf(address(this)) == 1 ether);
+    }
+
+    function testIssue11PoolFallbackDoesNotBypassNormalization() public {
+        Wrapped weth = new Wrapped();
+        NativeFirstV3 dex = new NativeFirstV3(weth);
+        uint24[] memory fees = new uint24[](1);
+        fees[0] = 500;
+        V3Adapter adapter = new V3Adapter("V3", address(dex), address(dex), fees);
+        RamsesMock ram = new RamsesMock(address(weth));
+        RamsesFactoryMock factory = new RamsesFactoryMock(address(ram));
+        address[] memory adapters = new address[](2);
+        adapters[0] = address(adapter);
+        adapters[1] = address(ram);
+        RoutePoolExecutor pool = new RoutePoolExecutor(
+            address(weth),
+            adapters,
+            address(0),
+            address(adapter),
+            address(0),
+            address(ram),
+            address(factory)
+        );
+        weth.mint(address(this), 1 ether);
+        weth.approve(address(pool), 1 ether);
+        weth.mint(address(pool), 7);
+        output.mint(address(pool), 8);
+        output.mint(address(dex), 2 ether);
+        vm.deal(address(dex), 1 ether);
+        RoutePoolExecutor.Branch[] memory branches = new RoutePoolExecutor.Branch[](1);
+        branches[0].amountIn = 1 ether;
+        branches[0].legs = new RoutePoolExecutor.Leg[](1);
+        branches[0].legs[0] =
+            RoutePoolExecutor.Leg(address(adapter), address(output), 500, 0, address(0), false);
+        require(
+            pool.swap(
+                address(weth),
+                address(output),
+                1 ether,
+                2 ether,
+                recipient,
+                block.timestamp,
+                branches
+            ) == 2 ether
+        );
+        require(weth.balanceOf(address(pool)) == 7 && output.balanceOf(address(pool)) == 8);
+        require(weth.balanceOf(address(this)) == 0 && output.balanceOf(recipient) == 2 ether);
+        require(weth.allowance(address(pool), address(adapter)) == 0);
+        require(weth.allowance(address(pool), address(dex)) == 0);
+        require(weth.balanceOf(address(dex)) == 1 ether && address(dex).balance == 0);
+    }
+
+    function testIssue11ResidualNativeCannotBlockWethSwap() public {
+        _wethSwap(1 ether, false);
+    }
+
+    function testFuzzIssue11ResidualNative(uint96 raw) public {
+        _wethSwap(uint256(raw) % 10 ether, false);
+    }
+
+    function testIssue11PartialFillStillRejected() public {
+        _wethSwap(1 ether, true);
+    }
+
+    function _wethSwap(uint256 residual, bool partialFill) private {
+        Wrapped weth = new Wrapped();
+        NativeFirstV3 router = new NativeFirstV3(weth);
+        uint24[] memory fees = new uint24[](1);
+        fees[0] = 500;
+        V3Adapter adapter = new V3Adapter("V3", address(router), address(router), fees);
+        weth.mint(address(this), 1 ether);
+        weth.approve(address(adapter), 1 ether);
+        weth.mint(address(adapter), 7);
+        output.mint(address(adapter), 8);
+        output.mint(address(router), 2 ether);
+        vm.deal(address(adapter), 9);
+        vm.deal(address(router), residual);
+        if (partialFill) {
+            router.setPartial();
+        }
+        (bool ok, bytes memory result) = address(adapter)
+            .call(
+                abi.encodeCall(
+                    adapter.swap, (address(weth), address(output), 1 ether, 2 ether, 500)
+                )
+            );
+        if (partialFill) {
+            require(!ok && weth.balanceOf(address(this)) == 1 ether);
+            require(address(router).balance == residual);
+        } else {
+            require(ok, "ISSUE11: residual ETH blocked swap");
+            require(abi.decode(result, (uint256)) == 2 ether);
+            require(
+                weth.balanceOf(address(this)) == 0 && output.balanceOf(address(this)) == 2 ether
+            );
+            require(weth.balanceOf(address(router)) == residual);
+            require(address(router).balance == 0);
+        }
+        require(weth.balanceOf(address(adapter)) == 7 && output.balanceOf(address(adapter)) == 8);
+        require(
+            address(adapter).balance == 9 && weth.allowance(address(adapter), address(router)) == 0
+        );
+    }
+}
