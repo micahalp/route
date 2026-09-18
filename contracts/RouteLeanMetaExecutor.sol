@@ -5,8 +5,9 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
-/// @notice Fee-free upstream settlement with direct recipient delivery.
-/// @dev Measures recipient balances, preserves donations and revokes temporary approvals.
+/// @notice Fee-free upstream settlement with executor-custodied output.
+/// @dev Upstream calldata must deliver output here. Recipient inflows during the
+/// upstream call never count toward minOut. Preserves donations and revokes approvals.
 contract RouteLeanMetaExecutor is ReentrancyGuard {
     using SafeERC20 for IERC20;
     address public immutable aggregator;
@@ -70,7 +71,6 @@ contract RouteLeanMetaExecutor is ReentrancyGuard {
 
         uint256 beforeInput = _balance(tokenIn, address(this)) - msg.value;
         uint256 beforeOutput = _balance(tokenOut, address(this));
-        uint256 beforeRecipient = _balance(tokenOut, recipient);
         if (tokenIn != address(0)) {
             IERC20(tokenIn).safeTransferFrom(msg.sender, address(this), amountIn);
             if (_balance(tokenIn, address(this)) != beforeInput + amountIn) {
@@ -86,19 +86,31 @@ contract RouteLeanMetaExecutor is ReentrancyGuard {
         if (tokenIn != address(0)) {
             IERC20(tokenIn).forceApprove(aggregator, 0);
         }
-        if (
-            _balance(tokenIn, address(this)) != beforeInput
-                || _balance(tokenOut, address(this)) != beforeOutput
-        ) {
+        if (_balance(tokenIn, address(this)) != beforeInput) {
             revert UnsupportedToken();
         }
-        uint256 afterRecipient = _balance(tokenOut, recipient);
-        if (afterRecipient < beforeRecipient) {
+        uint256 afterOutput = _balance(tokenOut, address(this));
+        if (afterOutput < beforeOutput) {
             revert SlippageExceeded();
         }
-        amountOut = afterRecipient - beforeRecipient;
+        amountOut = afterOutput - beforeOutput;
         if (amountOut < minOut) {
             revert SlippageExceeded();
+        }
+        if (tokenOut == address(0)) {
+            (bool sent,) = recipient.call{value: amountOut}("");
+            if (!sent) {
+                revert InvalidSwap();
+            }
+        } else {
+            uint256 beforeRecipient = IERC20(tokenOut).balanceOf(recipient);
+            IERC20(tokenOut).safeTransfer(recipient, amountOut);
+            if (IERC20(tokenOut).balanceOf(recipient) != beforeRecipient + amountOut) {
+                revert UnsupportedToken();
+            }
+        }
+        if (_balance(tokenOut, address(this)) != beforeOutput) {
+            revert UnsupportedToken();
         }
         emit Swapped(msg.sender, recipient, tokenIn, tokenOut, amountIn, amountOut);
     }
